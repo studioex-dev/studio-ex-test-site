@@ -347,7 +347,7 @@ section{position:relative}
   padding:8px 0 12px;outline:none;transition:border-color .3s;resize:none;
 }
 .field input:focus,.field textarea:focus{border-bottom-color:var(--coral)}
-.join-success{opacity:0;pointer-events:none;position:absolute;inset:44px 42px;display:flex;flex-direction:column;justify-content:center}
+.join-success{opacity:0;pointer-events:none;position:absolute;inset:44px 42px 120px;display:flex;flex-direction:column;justify-content:center}
 .join-success h3{color:var(--paper)}
 .join-success h3 em{color:var(--coral)}
 .join-success .footnote{margin-top:24px}
@@ -363,7 +363,7 @@ body > footer{padding:0 0 46px;background:var(--ink)}
   animation:travel 6s linear infinite;
 }
 @keyframes travel{from{left:-22%}to{left:112%}}
-.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:4vw;padding:9vh 6vw 7vh}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:3vw;padding:9vh 6vw 7vh}
 .fcol .ft{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--grey);text-transform:uppercase;margin-bottom:20px}
 .fcol a,.fcol span{
   display:block;font-family:var(--mono);font-size:12px;letter-spacing:.06em;
@@ -377,6 +377,70 @@ body > footer{padding:0 0 46px;background:var(--ink)}
   display:flex;justify-content:space-between;gap:20px;padding:5vh 6vw 0;
   font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--grey);text-transform:uppercase;
 }
+
+/* ============ CREDITS ============ */
+.credit{
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--grey);
+  text-transform:uppercase;margin:-12px 0 20px;
+}
+
+/* ============ WAITLIST (SIX DEGREES) ============ */
+#waitlist{padding:20vh 0 16vh;border-top:1px solid var(--hairline)}
+#waitlist h2{max-width:12em}
+#waitlist .sub{margin-top:34px}
+.wl-form{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin-top:44px}
+.wl-form input{
+  width:min(360px,100%);background:transparent;border:0;
+  border-bottom:1px solid rgba(244,242,238,.22);color:var(--paper);
+  font-family:var(--display);font-weight:600;font-size:16px;
+  padding:10px 0 12px;outline:none;transition:border-color .3s;
+}
+.wl-form input:focus{border-bottom-color:var(--coral)}
+#waitlist .footnote{margin-top:22px}
+#waitlist .footnote a{color:var(--grey2);text-decoration:underline}
+.quotes{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:10vh}
+.quote{border:1px solid var(--hairline);padding:24px 22px;position:relative}
+.quote p{font-size:clamp(.95rem,1.15vw,1.1rem);font-weight:600;line-height:1.45;color:var(--grey2)}
+.quote span{
+  display:block;margin-top:18px;font-family:var(--mono);font-size:9px;
+  letter-spacing:.14em;color:var(--coral);text-transform:uppercase;
+}
+
+/* ============ WE WORK EVERYWHERE ============ */
+#everywhere{padding:12vh 0 14vh}
+.wheres{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:20px}
+.wh{border-top:1px solid var(--hairline);padding-top:20px}
+.wh .n{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--coral);display:block;margin-bottom:12px}
+.wh .t{font-size:clamp(1.2rem,2vw,2rem);font-weight:900;text-transform:uppercase;letter-spacing:-.01em}
+
+/* ============ ARTISTS (WORLD B) ============ */
+.artists{display:grid;grid-template-columns:repeat(3,1fr);gap:4vw;margin-top:10vh}
+.artist .aname{
+  font-size:clamp(1.2rem,1.8vw,1.7rem);font-weight:900;text-transform:uppercase;
+  letter-spacing:-.01em;color:var(--white);
+}
+.artist .arole{
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--blue-tint);
+  text-transform:uppercase;margin:10px 0 16px;
+}
+.artist p{font-size:.98rem;font-weight:600;line-height:1.55;color:var(--blue-tint)}
+.artist .btn{margin-top:22px}
+.looking{
+  margin-top:9vh;font-family:var(--mono);font-size:12px;letter-spacing:.18em;
+  color:var(--white);text-transform:uppercase;
+}
+.looking b{color:var(--coral);font-weight:500}
+
+/* ============ CONTACT ROWS ============ */
+.contact-rows{
+  margin-top:30px;padding-top:24px;border-top:1px solid var(--hairline);
+  display:flex;flex-wrap:wrap;gap:8px 26px;
+}
+.contact-rows a,.contact-rows span{
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--grey2);
+  text-transform:uppercase;transition:color .25s;
+}
+.contact-rows a:hover{color:var(--coral)}
 
 /* ============ REDUCED MOTION / STATIC ============ */
 body.reduced .line{transform:none !important}
@@ -408,6 +472,9 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
   .fgrid{grid-template-columns:1fr 1fr}
   .founder{grid-template-columns:1fr;gap:34px}
   .frow .fl{width:92px}
+  .quotes{grid-template-columns:1fr 1fr}
+  .wheres{grid-template-columns:1fr 1fr;gap:30px 20px}
+  .artists{grid-template-columns:1fr;gap:44px}
 }
 </style>
 </head>
@@ -432,6 +499,7 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
   <a href="#hero" class="monogram">e<i>x</i></a>
   <nav>
     <a href="#work">Work</a>
+    <a href="#waitlist">Waitlist</a>
     <a href="#studio">Studio</a>
     <a href="#model-manifesto">Model</a>
     <a href="#join">Contact</a>
@@ -466,15 +534,15 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
 <section id="manifesto" class="world-b flood">
   <div class="flood-curtain"></div>
   <div class="flood-content inner">
-    <p class="eyebrow">[ 01 / MANIFESTO ]</p>
+    <p class="eyebrow">[ 01 / TECHNOLOGY · ART · CULTURE ]</p>
     <h2 class="reveal">
       <span class="mask"><span class="line">ENGAGE. PERSONALIZE.</span></span>
       <span class="mask"><span class="line"><em>IMMERSE.</em></span></span>
     </h2>
     <div class="lines">
-      <p>We merge art and technology until the line between them disappears.</p>
-      <p class="tint">We build our own tech in-house, so we own every pixel — and every insight.</p>
-      <p class="tint">Full IP, end to end. Experiences about one subject: human connection.</p>
+      <p>An impact-driven multi-media technology studio, founded in London — born from art, product design and purpose-driven innovation.</p>
+      <p class="tint">A creative engine powering networking data infrastructure, experiential frameworks, spatial installations and cultural interventions that respond to people and the world around them.</p>
+      <p class="tint">Built in-house, full IP, end to end. Experiences about one subject: human connection.</p>
     </div>
   </div>
 </section>
@@ -561,13 +629,16 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
       <article class="beat">
         <p class="eyebrow">[ 01/05 · FLAGSHIP · REAL-TIME PLATFORM ]</p>
         <h3>The Six Degrees</h3>
+        <p class="credit">8 billion lives, one artwork · Coming Spring/Summer 2026</p>
         <p class="sub">A real-time 3D visualisation of global human connectivity — guests co-create an evolving artwork through organic referral.</p>
         <p class="sub">It launches digital-first, and tours physically second. The map comes before the room.</p>
         <div class="garnish"><b><span data-count="173912" data-live="conn">0</span></b>LIVE NODES · DEMO DATA</div>
+        <a class="btn" href="#waitlist" data-cursor="join"><span class="rl"><span>( Join the waitlist )</span><span>( Join the waitlist )</span></span></a>
       </article>
       <article class="beat">
         <p class="eyebrow">[ 02/05 · SMART EVENT NETWORKING ]</p>
         <h3>Orbit</h3>
+        <p class="credit">By Studio EX &amp; Narrative Engine · Product · Technology</p>
         <p class="sub">One scan. Two seconds. No app — a bi-directional connection.</p>
         <p class="sub">Personalised post-event reports for attendees; live networking intelligence for organisers. Next stops: EEMAGINE India and IMEX Las Vegas.</p>
         <div class="garnish"><b><span data-count="1284">0</span></b>CONNECTIONS AT LAST EVENT · DEMO DATA</div>
@@ -583,6 +654,7 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
       <article class="beat">
         <p class="eyebrow">[ 04/05 · DATA ARTWORK · ADVOCACY ]</p>
         <h3>The Cost of War</h3>
+        <p class="credit">By Blueprint &amp; Studio EX · Artwork · Experience</p>
         <p class="sub">An interactive data artwork on the economic, social and environmental value lost to global defence spend.</p>
         <p class="sub">Visitors redistribute the budget themselves — what disconnection costs, counted in public.</p>
         <div class="garnish"><b>$<span data-count="2887" data-suffix="BN">0</span></b>GLOBAL DEFENCE SPEND, ONE YEAR · SIPRI</div>
@@ -591,7 +663,8 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
       <article class="beat">
         <p class="eyebrow">[ 05/05 · OPEN CALL · ALL MEDIUMS ]</p>
         <h3>FOMO</h3>
-        <p class="sub">A recurring open-call show about togetherness and cooperation — all mediums, all welcome.</p>
+        <p class="credit">Show series · Edition 002 — Spring/Summer 2026</p>
+        <p class="sub">A recurring open-call show where artists from all geographies and all mediums respond to a theme of social implication — togetherness, unity, polarisation.</p>
         <p class="sub">Financially self-contained, nothing taken out. The studio's thank-you to the art world.</p>
         <div class="garnish"><b><span data-count="120" data-suffix="+">0</span></b>ARTISTS SO FAR · DEMO DATA</div>
       </article>
@@ -599,21 +672,61 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
   </div>
 </section>
 
-<!-- work recap strip -->
+<!-- the full catalogue -->
 <section id="recap">
-  <p class="eyebrow">[ THE FIVE DEGREES · DRAG ]</p>
+  <p class="eyebrow">[ THE CATALOGUE · 001–009 · DRAG ]</p>
   <div class="strip" data-cursor="drag">
-    <div class="card"><div class="notch"></div><span class="idx">01/05</span><h4>The Six Degrees</h4><span class="tag">FLAGSHIP · REAL-TIME PLATFORM</span></div>
-    <div class="card"><div class="notch"></div><span class="idx">02/05</span><h4>Orbit</h4><span class="tag">SMART EVENT NETWORKING</span></div>
-    <div class="card"><div class="notch"></div><span class="idx">03/05</span><h4>Catalyst</h4><span class="tag">TRUST-WEIGHTED NETWORK</span></div>
-    <div class="card"><div class="notch"></div><span class="idx">04/05</span><h4>The Cost of War</h4><span class="tag">DATA ARTWORK · ADVOCACY</span></div>
-    <div class="card"><div class="notch"></div><span class="idx">05/05</span><h4>FOMO</h4><span class="tag">OPEN CALL · ALL MEDIUMS</span></div>
+    <div class="card"><div class="notch"></div><span class="idx">001</span><h4>The Six Degrees</h4><span class="tag">STUDIO EX · FORTHCOMING — SPRING/SUMMER 2026</span></div>
+    <a class="card" href="https://orbit.thesixdegrees.co" target="_blank" rel="noopener" data-cursor="view"><div class="notch"></div><span class="idx">002</span><h4>Orbit</h4><span class="tag">STUDIO EX &amp; NARRATIVE ENGINE · PRODUCT</span></a>
+    <a class="card" href="https://studioex-creative.github.io/cost-of-war/" target="_blank" rel="noopener" data-cursor="view"><div class="notch"></div><span class="idx">003</span><h4>The Cost of War</h4><span class="tag">BLUEPRINT &amp; STUDIO EX · ARTWORK</span></a>
+    <div class="card"><div class="notch"></div><span class="idx">004</span><h4>Olha Pra Mim [Look at Me]</h4><span class="tag">THIAGO SANTOS · 4,000+ GAZES · 10+ YEARS</span></div>
+    <div class="card"><div class="notch"></div><span class="idx">005</span><h4>A Problem Shared</h4><span class="tag">PERFORMANCE · SHORT FILM · MENTAL HEALTH</span></div>
+    <div class="card"><div class="notch"></div><span class="idx">006</span><h4>A Portrait of Emotions</h4><span class="tag">PARTICIPATORY SOCIAL EXPERIMENT</span></div>
+    <div class="card"><div class="notch"></div><span class="idx">007</span><h4>Identity Crisis</h4><span class="tag">ANONYMOUS · TORN VOGUE 1985–95 · WEST LONDON</span></div>
+    <div class="card"><div class="notch"></div><span class="idx">008</span><h4>Boy Without Balloon</h4><span class="tag">BLUEPRINT · URBAN · AFTER BANKSY</span></div>
+    <div class="card"><div class="notch"></div><span class="idx">009</span><h4>FOMO Show Series</h4><span class="tag">OPEN CALL · EDITION 002 — SPRING/SUMMER 2026</span></div>
   </div>
   <div class="workclose">
     <h3 class="reveal editorial">
-      <span class="mask"><span class="line">Five projects. One idea:</span></span>
+      <span class="mask"><span class="line">One practice, every medium:</span></span>
       <span class="mask"><span class="line"><em>connection</em> is the artwork.</span></span>
     </h3>
+  </div>
+</section>
+
+<!-- the six degrees waitlist -->
+<section id="waitlist">
+  <div class="wrap">
+    <p class="eyebrow">[ FORTHCOMING ARTWORK · THE SIX DEGREES ]</p>
+    <h2 class="reveal">
+      <span class="mask"><span class="line">8 BILLION LIVES,</span></span>
+      <span class="mask"><span class="line"><em>ONE ARTWORK</em>.</span></span>
+    </h2>
+    <p class="sub">Humanity united, one touch at a time. Join the most collaborative piece of art in history — coming Spring/Summer 2026.</p>
+    <form id="wl-form" class="wl-form" autocomplete="off">
+      <input id="wl-email" type="email" required placeholder="you@example.com" aria-label="Email address">
+      <button class="btn primary" type="submit" data-cursor="join"><span class="rl"><span>( Join the waitlist )</span><span>( Join the waitlist )</span></span></button>
+    </form>
+    <p class="footnote" id="wl-note">TEST BUILD — THE REAL WAITLIST IS LIVE AT <a href="https://www.studioex.co" target="_blank" rel="noopener">STUDIOEX.CO</a></p>
+    <div class="quotes">
+      <div class="quote"><p>"The most collaborative piece of art ever made."</p><span>Industry CEO</span></div>
+      <div class="quote"><p>"A truly insane and radical new concept."</p><span>Early Adopter</span></div>
+      <div class="quote"><p>"The next generation of immersion is here."</p><span>Gallerist</span></div>
+      <div class="quote"><p>"The audacity to even try something like this."</p><span>Fellow Artist</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- we work everywhere -->
+<section id="everywhere">
+  <div class="wrap">
+    <p class="eyebrow">[ WE WORK EVERYWHERE ]</p>
+    <div class="wheres">
+      <div class="wh"><span class="n">01</span><span class="t">In Person</span></div>
+      <div class="wh"><span class="n">02</span><span class="t">In Public</span></div>
+      <div class="wh"><span class="n">03</span><span class="t">On the Wall</span></div>
+      <div class="wh"><span class="n">04</span><span class="t">Online</span></div>
+    </div>
   </div>
 </section>
 
@@ -656,22 +769,44 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
   <div class="flood-curtain"></div>
   <div class="flood-content">
     <div class="inner">
-      <p class="eyebrow">[ 06 / THE STUDIO ]</p>
+      <p class="eyebrow">[ 06 / THE STUDIO · IMPACT DRIVEN ]</p>
       <h2 class="reveal">
-        <span class="mask"><span class="line">BUILT IN LONDON.</span></span>
-        <span class="mask"><span class="line">WIRED FOR <em>EVERYONE</em>.</span></span>
+        <span class="mask"><span class="line">EVERYONE HAS A VOICE.</span></span>
+        <span class="mask"><span class="line">USE IT FOR <em>GOOD</em>.</span></span>
       </h2>
       <div class="founder">
         <div class="who">
           <div class="name">Gregory Taylor</div>
-          <div class="role">Founder · Studio EX</div>
+          <div class="role">Founder &amp; Director</div>
         </div>
         <blockquote>
           "It's not about the technology you use, but how you use it."
           <footer>— Founder line, kept verbatim</footer>
         </blockquote>
       </div>
-      <p class="adv">A team across creative technology, live events and platform engineering — with advisors from the rooms where entertainment actually gets made.</p>
+      <p class="adv">We create immersive, tech-driven experiences with a purpose: to connect, inspire and drive positive change. Our work champions inclusivity, sustainability and social progress — sparking meaningful dialogue and leaving a lasting impact.</p>
+      <div class="artists">
+        <div class="artist">
+          <p class="eyebrow">[ OUR ARTISTS · 01 ]</p>
+          <div class="aname">Blueprint</div>
+          <div class="arole">Audio Visual Artist &amp; Technologist</div>
+          <p>Conceptualised in New York, shaped by London's underground creative scene. Sculpture, collage and mixed media on human psychology, environmentalism and social constructs.</p>
+        </div>
+        <div class="artist">
+          <p class="eyebrow">[ OUR ARTISTS · 02 ]</p>
+          <div class="aname">Thiago Santos</div>
+          <div class="arole">Photographer &amp; Fine Artist</div>
+          <p>São Paulo, Brazil. His acclaimed visual book of portraits, "Olha pra mim", launched in 2021 — over 4,000 gazes gathered across more than ten years.</p>
+        </div>
+        <div class="artist">
+          <p class="eyebrow">[ BECOME AN ARTIST ]</p>
+          <div class="aname">This could be you.</div>
+          <div class="arole">Open invitation</div>
+          <p>We're looking for visionary creators exploring new narratives and driving impact. If that's you, reach out.</p>
+          <a href="#join" class="btn onblue"><span class="rl"><span>( Reach out )</span><span>( Reach out )</span></span></a>
+        </div>
+      </div>
+      <p class="looking">LOOKING FOR: <b>ARTISTS · PARTNERS · FUNDERS — NOW</b></p>
     </div>
     <div class="marquee" aria-hidden="true">
       <div class="marquee-inner" id="marquee-inner">
@@ -721,6 +856,12 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
       <h3 class="editorial">Welcome to the <em>network</em>.</h3>
       <p class="footnote">TEST BUILD — NOTHING WAS SENT ANYWHERE. THE PRODUCTION FORM WILL CONNECT FOR REAL.</p>
     </div>
+    <div class="contact-rows">
+      <a href="mailto:greg@studioex.co">greg@studioex.co</a>
+      <a href="https://wa.me/447715643569" target="_blank" rel="noopener">WhatsApp ↗</a>
+      <a href="tel:+447715643569">+44 771 564 3569</a>
+      <span>London, United Kingdom</span>
+    </div>
   </div>
 </section>
 
@@ -735,18 +876,27 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
     </div>
     <div class="fcol">
       <div class="ft">The Work</div>
-      <span class="soon">The Six Degrees — soon</span>
+      <span class="soon">The Six Degrees — 2026</span>
       <a href="https://orbit.thesixdegrees.co" target="_blank" rel="noopener">Orbit ↗</a>
-      <span class="soon">Catalyst — soon</span>
       <a href="https://studioex-creative.github.io/cost-of-war/" target="_blank" rel="noopener">The Cost of War ↗</a>
+      <span class="soon">Olha Pra Mim</span>
       <span class="soon">FOMO — open call</span>
+      <a href="https://www.studioex.co" target="_blank" rel="noopener">Full catalogue ↗</a>
     </div>
     <div class="fcol">
       <div class="ft">Site</div>
       <a href="#work">Work</a>
+      <a href="#waitlist">Waitlist</a>
       <a href="#studio">Studio</a>
       <a href="#model-manifesto">Model</a>
       <a href="#join">Contact</a>
+    </div>
+    <div class="fcol">
+      <div class="ft">Contact</div>
+      <a href="mailto:greg@studioex.co">greg@studioex.co</a>
+      <a href="https://wa.me/447715643569" target="_blank" rel="noopener">WhatsApp ↗</a>
+      <a href="tel:+447715643569">+44 771 564 3569</a>
+      <span>London, United Kingdom</span>
     </div>
     <div class="fcol">
       <div class="ft">Status</div>
@@ -757,7 +907,8 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
   </div>
   <div class="glowline"></div>
   <div class="fbase">
-    <span>© 2026 Studio EX, London</span>
+    <span>© 2026 Studio EX, London. All rights reserved</span>
+    <span><a href="https://www.studioex.co" target="_blank" rel="noopener">Terms &amp; Conditions</a> · <a href="https://www.studioex.co" target="_blank" rel="noopener">Privacy Policy</a></span>
     <span>Exhibit 00 — the site is the sixth artwork</span>
   </div>
 </footer>
@@ -1253,15 +1404,22 @@ storySection('work', 'work-canvas', 'work-index', [
 
 /* ---------- recap strip drag ---------- */
 var strip = document.querySelector('.strip');
-var sdown = false, sx = 0, sl = 0;
+var sdown = false, sx = 0, sl = 0, sdrag = false;
 strip.addEventListener('pointerdown', function(e){
-  sdown = true; sx = e.clientX; sl = strip.scrollLeft;
+  sdown = true; sdrag = false; sx = e.clientX; sl = strip.scrollLeft;
   strip.setPointerCapture(e.pointerId);
 });
-strip.addEventListener('pointermove', function(e){ if (sdown) strip.scrollLeft = sl - (e.clientX - sx); });
+strip.addEventListener('pointermove', function(e){
+  if (!sdown) return;
+  if (Math.abs(e.clientX - sx) > 6) sdrag = true;
+  strip.scrollLeft = sl - (e.clientX - sx);
+});
 ['pointerup','pointercancel'].forEach(function(ev){
   strip.addEventListener(ev, function(){ sdown = false; });
 });
+strip.addEventListener('click', function(e){
+  if (sdrag) { e.preventDefault(); e.stopPropagation(); }
+}, true);
 
 /* ---------- marquee duplicate ---------- */
 var mq = document.getElementById('marquee-inner');
@@ -1279,6 +1437,18 @@ joinForm.addEventListener('submit', function(e){
   if (joinCard.classList.contains('sent')) return;
   joinCard.classList.add('sent');
   joinNet.ignite();
+  conn += 1; renderConn();
+});
+
+/* ---------- six degrees waitlist ---------- */
+var wlForm = document.getElementById('wl-form');
+var wlNote = document.getElementById('wl-note');
+wlForm.addEventListener('submit', function(e){
+  e.preventDefault();
+  wlForm.querySelector('input').disabled = true;
+  wlForm.querySelector('button').style.opacity = 0.35;
+  wlForm.querySelector('button').style.pointerEvents = 'none';
+  wlNote.innerHTML = 'YOU\'RE ON THE LIST — TEST BUILD, NOTHING WAS SENT. THE REAL WAITLIST IS LIVE AT <a href="https://www.studioex.co" target="_blank" rel="noopener">STUDIOEX.CO</a>';
   conn += 1; renderConn();
 });
 

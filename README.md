@@ -18,6 +18,13 @@ You arrive as a node, scrolling traverses the network, and the closing form
   ex logo before locking.
 - All counters are labelled **DEMO DATA** in the UI — honesty is on-brand.
 - Full `prefers-reduced-motion` path: no pinning, static beats, final values.
+- Real content folded in from the live Wix site (www.studioex.co): the Six
+  Degrees waitlist ("8 billion lives, one artwork", Spring/Summer 2026),
+  the full 001–009 catalogue (Olha Pra Mim, A Problem Shared, A Portrait of
+  Emotions, Identity Crisis, Boy Without Balloon…), testimonial quotes,
+  Our Artists (Blueprint, Thiago Santos) + become-an-artist call, "We Work
+  Everywhere", purpose copy, credits (Narrative Engine, Blueprint), and the
+  real contact details (greg@studioex.co / WhatsApp / +44 771 564 3569).
 
 ## Run it
 
