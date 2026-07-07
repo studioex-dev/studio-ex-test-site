@@ -95,9 +95,22 @@ body.has-cursor input,body.has-cursor textarea,body.has-cursor label{cursor:none
   position:fixed;inset:0;z-index:700;background:var(--ink);
   display:flex;align-items:center;justify-content:center;
 }
-.entry-log{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--grey2);line-height:2.3}
-.entry-line{opacity:0}
+.entry-log{
+  font-family:var(--mono);font-size:13px;letter-spacing:.1em;color:var(--grey2);
+  line-height:2.5;min-width:min(430px,84vw);
+}
+.entry-line{min-height:2.5em}
 .entry-line .coral{color:var(--coral)}
+.entry-caret{
+  display:inline-block;width:8px;height:14px;background:var(--coral);
+  vertical-align:-2px;margin-left:5px;animation:caret .7s steps(2) infinite;
+}
+@keyframes caret{50%{opacity:0}}
+.entry-skip{
+  position:absolute;bottom:30px;left:0;right:0;text-align:center;
+  font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--grey);
+  text-transform:uppercase;opacity:.6;
+}
 
 /* ============ NAV / HUD ============ */
 #nav{
@@ -446,18 +459,76 @@ body > footer{padding:0 0 46px;background:var(--ink)}
 #services{padding:20vh 0 16vh;border-top:1px solid var(--hairline)}
 #services h2{max-width:13em}
 #services > .wrap > .sub{margin-top:34px}
-.svc-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:10vh}
-.svc{border:1px solid var(--hairline);padding:30px 28px 22px;position:relative;background:#0d0d14}
-.svc .notch{
-  position:absolute;right:-1px;top:26px;width:12px;height:12px;background:var(--ink);
-  border-left:1px solid rgba(244,242,238,.22);border-bottom:1px solid rgba(244,242,238,.22);
+.sgroup{margin-top:9vh}
+.sg-head{display:flex;align-items:baseline;gap:10px 24px;flex-wrap:wrap}
+.sg-head .eyebrow{margin:0;color:var(--c)}
+.sg-head .sg-t{font-size:clamp(1.1rem,1.5vw,1.4rem);font-weight:900;text-transform:uppercase;letter-spacing:-.01em}
+.sg-head .sg-d{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--grey);text-transform:uppercase}
+.scards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.g1{--c:#3FC9E8}.g2{--c:#FFB84D}.g3{--c:#8E5CF6}
+.scard{
+  position:relative;text-align:left;font-family:inherit;color:var(--paper);
+  border:1px solid var(--hairline);border-top:2px solid var(--c);
+  background:#0d0d14;padding:26px 24px 18px;
+  display:flex;flex-direction:column;gap:13px;cursor:pointer;
+  transition:transform .35s ease,background .35s ease,border-color .35s ease;
 }
-.svc .lead{font-family:var(--mono);font-size:10px;color:var(--coral);letter-spacing:.14em;text-transform:uppercase}
-.svc-title{font-size:clamp(1.15rem,1.5vw,1.45rem);font-weight:900;text-transform:uppercase;letter-spacing:-.01em;margin:14px 0 8px}
-.svc .whatfor{font-size:.92rem;color:var(--grey2);font-weight:600;line-height:1.5;margin-bottom:24px}
-.svc-item{padding:14px 0;border-top:1px solid var(--hairline)}
-.svc-item .si-t{font-weight:800;font-size:.98rem;text-transform:uppercase}
-.svc-item .si-d{margin-top:6px;font-size:.88rem;color:var(--grey);font-weight:600;line-height:1.55}
+.scard:hover,.scard:focus-visible{
+  transform:translateY(-5px);background:#12121b;
+  border-color:rgba(244,242,238,.22);border-top-color:var(--c);outline:none;
+}
+.scard .icon{width:44px;height:44px;color:var(--c)}
+.scard .icon [class^="i-"],.scard .icon [class*=" i-"]{transform-box:fill-box;transform-origin:center}
+.sc-t{font-weight:900;font-size:1.02rem;text-transform:uppercase}
+.sc-d{font-size:.88rem;color:var(--grey);font-weight:600;line-height:1.5;flex:1}
+.sc-more{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--grey2);text-transform:uppercase;transition:color .3s}
+.scard:hover .sc-more,.scard:focus-visible .sc-more{color:var(--c)}
+/* icon animations */
+.i-spin{animation:ispin 14s linear infinite}
+.i-spin-r{animation:ispin 20s linear infinite reverse}
+@keyframes ispin{to{transform:rotate(360deg)}}
+.i-pulse{animation:ipulse 2.4s ease-in-out infinite}
+@keyframes ipulse{0%,100%{opacity:.3}50%{opacity:1}}
+.i-eq1,.i-eq2,.i-eq3,.i-eq4{transform-origin:center bottom !important;animation:ieq 1.5s ease-in-out infinite}
+.i-eq2{animation-delay:.2s}.i-eq3{animation-delay:.4s}.i-eq4{animation-delay:.6s}
+@keyframes ieq{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+.i-dash{stroke-dasharray:4 5;animation:idash 2s linear infinite}
+@keyframes idash{to{stroke-dashoffset:-18}}
+.i-draw{stroke-dasharray:70;stroke-dashoffset:70;animation:idraw 3.4s ease-in-out infinite}
+@keyframes idraw{40%{stroke-dashoffset:0}68%{stroke-dashoffset:0}100%{stroke-dashoffset:-70}}
+.i-blink{animation:iblink 1.1s steps(2) infinite}
+@keyframes iblink{50%{opacity:0}}
+.i-nudge{animation:inudge 2.8s ease-in-out infinite}
+@keyframes inudge{0%,100%{transform:translate(0,0)}50%{transform:translate(3px,-3px)}}
+.i-p1{animation:ipulse 2s ease-in-out infinite}
+.i-p2{animation:ipulse 2s ease-in-out .3s infinite}
+.i-p3{animation:ipulse 2s ease-in-out .6s infinite}
+.i-p4{animation:ipulse 2s ease-in-out .9s infinite}
+body.reduced .scard .icon *{animation:none !important}
+/* service detail modal */
+.svc-modal{position:fixed;inset:0;z-index:260;display:flex;align-items:center;justify-content:center;padding:4vh 4vw}
+.svc-modal[hidden]{display:none}
+.svc-backdrop{position:absolute;inset:0;background:rgba(10,10,15,.78);backdrop-filter:blur(9px)}
+.svc-panel{
+  --c:var(--coral);
+  position:relative;width:min(600px,100%);max-height:86vh;overflow:auto;
+  background:#0d0d14;border:1px solid rgba(244,242,238,.16);border-top:3px solid var(--c);
+  padding:46px 44px 42px;
+}
+.svc-panel .eyebrow{color:var(--c)}
+.svc-panel h3{text-transform:none;letter-spacing:-.015em;margin-bottom:18px}
+.svc-panel .long{font-size:1rem;color:var(--grey2);font-weight:600;line-height:1.65}
+.svc-panel .dl{margin:28px 0 36px;border-top:1px solid var(--hairline);padding:0}
+.svc-panel .dl li{
+  list-style:none;font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+  color:var(--grey2);text-transform:uppercase;padding:11px 0;border-bottom:1px solid var(--hairline);
+}
+.svc-panel .dl li::before{content:'→ ';color:var(--c)}
+.svc-close{
+  position:absolute;top:16px;right:18px;background:none;border:0;color:var(--grey);
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:10px;cursor:pointer;transition:color .3s;
+}
+.svc-close:hover{color:var(--coral)}
 .how{margin-top:14vh}
 .how .hint{font-family:var(--mono);font-size:10px;color:var(--grey);letter-spacing:.14em;text-transform:uppercase;margin-top:14px}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:40px}
@@ -472,11 +543,19 @@ body > footer{padding:0 0 46px;background:var(--ink)}
 }
 .client{
   border-right:1px solid var(--hairline);border-bottom:1px solid var(--hairline);
-  padding:36px 12px;display:flex;align-items:center;justify-content:center;
+  padding:30px 18px;min-height:112px;display:flex;align-items:center;justify-content:center;
   font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--grey2);
   text-transform:uppercase;text-align:center;transition:color .3s;
 }
 .client:hover{color:var(--paper)}
+.client img{
+  max-height:38px;max-width:66%;display:block;
+  filter:grayscale(1) brightness(1.2);opacity:.72;transition:opacity .35s,filter .35s;
+}
+.client:hover img{opacity:1;filter:grayscale(0) brightness(1.05)}
+.client.inv img{filter:grayscale(1) invert(1) brightness(1.25)}
+.client.inv:hover img{filter:grayscale(1) invert(1) brightness(1.6);opacity:1}
+.clogo-inline{height:24px;display:inline-block;vertical-align:-5px;margin-right:12px;filter:grayscale(1) brightness(1.2)}
 .collabs{margin-top:12vh}
 .collab{
   display:grid;grid-template-columns:minmax(180px,240px) 1fr;gap:10px 30px;
@@ -527,7 +606,8 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
   .quotes{grid-template-columns:1fr 1fr}
   .wheres{grid-template-columns:1fr 1fr;gap:30px 20px}
   .artists{grid-template-columns:1fr;gap:44px}
-  .svc-groups{grid-template-columns:1fr}
+  .scards{grid-template-columns:1fr}
+  .svc-panel{padding:38px 26px 34px}
   .steps{grid-template-columns:1fr 1fr;gap:30px 20px}
   .client-grid{grid-template-columns:repeat(3,1fr)}
   .collab{grid-template-columns:1fr}
@@ -539,12 +619,8 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
 
 <!-- entry sequence -->
 <div id="entry" aria-hidden="true">
-  <div class="entry-log">
-    <p class="entry-line">&gt; ESTABLISHING NETWORK…</p>
-    <p class="entry-line">&gt; LOADING EXHIBIT 00</p>
-    <p class="entry-line">&gt; MAPPING <span id="entry-count">173,912</span> CONNECTIONS</p>
-    <p class="entry-line">&gt; NODE ASSIGNED: <span class="coral">YOU</span></p>
-  </div>
+  <div class="entry-log" id="entry-log"></div>
+  <div class="entry-skip">Click to skip</div>
 </div>
 
 <!-- custom cursor -->
@@ -799,36 +875,105 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
     <p class="sub">Proposals, research, design, strategy, execution and more. Scalable interactive experiences and artwork for your brand, in your space — from live exhibitions to permanent installations, tailored to your objectives, your specifications, your brief.</p>
     <p class="sub">Have a project, an artwork or a space in mind? Let's make something unforgettable.</p>
 
-    <div class="svc-groups">
-      <div class="svc">
-        <div class="notch"></div>
-        <span class="lead">[ 01 · CONTENT CREATION ]</span>
-        <h4 class="svc-title">Visual &amp; Experiential Design</h4>
-        <p class="whatfor">The things people see, touch and walk through.</p>
-        <div class="svc-item"><div class="si-t">Graphic Design</div><p class="si-d">Identity, print and campaign design that carries a concept from first sketch to finished artwork.</p></div>
-        <div class="svc-item"><div class="si-t">Digital &amp; Traditional Creative</div><p class="si-d">Screen-first or physical-first — content made for wherever your audience actually is.</p></div>
-        <div class="svc-item"><div class="si-t">Experiential Design</div><p class="si-d">Spatial narratives, exhibition design and visitor journeys that turn a space into a story.</p></div>
-        <div class="svc-item"><div class="si-t">Projection Mapping</div><p class="si-d">Architectural and object mapping that turns buildings, sets and sculptures into moving canvases.</p></div>
-        <div class="svc-item"><div class="si-t">AudioVisual</div><p class="si-d">Sound and vision engineered together — content, hardware specification and show control.</p></div>
-        <div class="svc-item"><div class="si-t">CAD Modelling</div><p class="si-d">Build-ready 3D models and technical drawings for fabrication, planning and install.</p></div>
+    <div class="sgroup g1">
+      <div class="sg-head">
+        <p class="eyebrow">[ 01 · CONTENT CREATION ]</p>
+        <span class="sg-t">Visual &amp; Experiential Design</span>
+        <span class="sg-d">The things people see, touch and walk through</span>
       </div>
-      <div class="svc">
-        <div class="notch"></div>
-        <span class="lead">[ 02 · DIRECTION ]</span>
-        <h4 class="svc-title">Strategy &amp; Creative Direction</h4>
-        <p class="whatfor">The thinking before the making.</p>
-        <div class="svc-item"><div class="si-t">Research &amp; Strategy</div><p class="si-d">Audience, market and cultural research that grounds every creative decision in evidence.</p></div>
-        <div class="svc-item"><div class="si-t">Proposals &amp; Pitch Deck Design</div><p class="si-d">Investor- and client-grade decks — the narrative, the design and the numbers behind them.</p></div>
-        <div class="svc-item"><div class="si-t">Concept &amp; Product Development</div><p class="si-d">From first spark to tested concept: storyboards, prototypes and a roadmap to build against.</p></div>
-        <div class="svc-item"><div class="si-t">Branding</div><p class="si-d">Naming, identity systems and guidelines built to survive contact with the real world.</p></div>
+      <div class="scards">
+        <button class="scard g1" data-svc="gd" data-cursor="view">
+          <svg class="icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="17" cy="23" r="9"/><rect class="i-spin" x="21" y="13" width="14" height="14"/></svg>
+          <span class="sc-t">Graphic Design</span>
+          <span class="sc-d">Identity, print and campaign design that carries a concept from first sketch to finished artwork.</span>
+          <span class="sc-more">( Learn more + )</span>
+        </button>
+        <button class="scard g1" data-svc="dt" data-cursor="view">
+          <svg class="icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="10" width="21" height="15"/><path class="i-pulse" d="M13 14l7 3.5-7 3.5z"/><path d="M31 12h8M31 17h8M31 22h8"/><path d="M11 30h9M15.5 25v5"/></svg>
+          <span class="sc-t">Digital &amp; Traditional Creative</span>
+          <span class="sc-d">Screen-first or physical-first — content made for wherever your audience actually is.</span>
+          <span class="sc-more">( Learn more + )</span>
+        </button>
+        <button class="scard g1" data-svc="xd" data-cursor="view">
+          <svg class="icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 37V21h7"/><path class="i-dash" d="M9 31c11 0 8-15 19-15h7"/><circle class="i-pulse" cx="36" cy="16" r="3"/></svg>
+          <span class="sc-t">Experiential Design</span>
+          <span class="sc-d">Spatial narratives, exhibition design and visitor journeys that turn a space into a story.</span>
+          <span class="sc-more">( Learn more + )</span>
+        </button>
+        <button class="scard g1" data-svc="pm" data-cursor="view">
+          <svg class="icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="18" width="10" height="8"/><path class="i-pulse" d="M15 20l19-9v22l-19-7" opacity=".7"/><path d="M37 8v28"/></svg>
+          <span class="sc-t">Projection Mapping</span>
+          <span class="sc-d">Architectural and object mapping that turns buildings, sets and sculptures into moving canvases.</span>
+          <span class="sc-more">( Learn more + )</span>
+        </button>
+        <button class="scard g1" data-svc="av" data-cursor="view">
+          <svg class="icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2.5"><path class="i-eq1" d="M11 34V21"/><path class="i-eq2" d="M18.5 34V12"/><path class="i-eq3" d="M26 34V17"/><path class="i-eq4" d="M33.5 34V24"/></svg>
+          <span class="sc-t">AudioVisual</span>
+          <span class="sc-d">Sound and vision engineered together — content, hardware specification and show control.</span>
+          <span class="sc-more">( Learn more + )</span>
+        </button>
+        <button class="scard g1" data-svc="cad" data-cursor="view">
+          <svg class="icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><g class="i-spin-r"><rect x="10" y="10" width="15" height="15"/><rect x="19" y="19" width="15" height="15"/><path d="M10 10l9 9M25 10l9 9M10 25l9 9M25 25l9 9"/></g></svg>
+          <span class="sc-t">CAD Modelling</span>
+          <span class="sc-d">Build-ready 3D models and technical drawings for fabrication, planning and install.</span>
+          <span class="sc-more">( Learn more + )</span>
+        </button>
       </div>
-      <div class="svc">
-        <div class="notch"></div>
-        <span class="lead">[ 03 · TECHNOLOGY ]</span>
-        <h4 class="svc-title">Interactive Technology</h4>
-        <p class="whatfor">The engine underneath — built in-house, owned end to end.</p>
-        <div class="svc-item"><div class="si-t">Creative &amp; Full Stack Code</div><p class="si-d">From front-of-house interactivity to back-of-house infrastructure — the same house code that powers Orbit and The Cost of War.</p></div>
-        <div class="svc-item"><div class="si-t">Creative AI Agent Implementation</div><p class="si-d">Practical AI agents woven into experiences and workflows — purposeful, measurable, never a gimmick.</p></div>
+    </div>
+
+    <div class="sgroup g2">
+      <div class="sg-head">
+        <p class="eyebrow">[ 02 · DIRECTION ]</p>
+        <span class="sg-t">Strategy &amp; Creative Direction</span>
+        <span class="sg-d">The thinking before the making</span>
+      </div>
+      <div class="scards">
+        <button class="scard g2" data-svc="rs" data-cursor="view">
+          <svg class="icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><path class="i-draw" d="M5 31l8-8 6 4 10-13 9 3"/><circle cx="31" cy="30" r="6"/><path d="M35.5 34.5L40 39"/></svg>
+          <span class="sc-t">Research &amp; Strategy</span>
+          <span class="sc-d">Audience, market and cultural research that grounds every creative decision in evidence.</span>
+          <span class="sc-more">( Learn more + )</span>
+        </button>
+        <button class="scard g2" data-svc="pd" data-cursor="view">
+          <svg class="icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="15" y="7" width="23" height="15" opacity=".3"/><rect x="10.5" y="12.5" width="23" height="15" opacity=".55"/><g class="i-nudge"><rect x="6" y="18" width="23" height="15"/><path d="M10 24h11M10 28h7"/></g></svg>
+          <span class="sc-t">Proposals &amp; Pitch Decks</span>
+          <span class="sc-d">Investor- and client-grade decks — the narrative, the design and the numbers behind them.</span>
+          <span class="sc-more">( Learn more + )</span>
+        </button>
+        <button class="scard g2" data-svc="cp" data-cursor="view">
+          <svg class="icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="22" cy="22" r="4.5"/><g class="i-pulse"><path d="M22 7v7M22 30v7M7 22h7M30 22h7M11.5 11.5l5 5M27.5 27.5l5 5M32.5 11.5l-5 5M11.5 32.5l5-5"/></g></svg>
+          <span class="sc-t">Concept &amp; Product Development</span>
+          <span class="sc-d">From first spark to tested concept: storyboards, prototypes and a roadmap to build against.</span>
+          <span class="sc-more">( Learn more + )</span>
+        </button>
+        <button class="scard g2" data-svc="br" data-cursor="view">
+          <svg class="icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><g class="i-spin"><path d="M22 9v26M11 15.5l22 13M33 15.5l-22 13"/></g><circle cx="22" cy="22" r="11" opacity=".3"/></svg>
+          <span class="sc-t">Branding</span>
+          <span class="sc-d">Naming, identity systems and guidelines built to survive contact with the real world.</span>
+          <span class="sc-more">( Learn more + )</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="sgroup g3">
+      <div class="sg-head">
+        <p class="eyebrow">[ 03 · TECHNOLOGY ]</p>
+        <span class="sg-t">Interactive Technology</span>
+        <span class="sg-d">The engine underneath — built in-house, owned end to end</span>
+      </div>
+      <div class="scards">
+        <button class="scard g3" data-svc="code" data-cursor="view">
+          <svg class="icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 12l-9 10 9 10"/><path d="M30 12l9 10-9 10"/><rect class="i-blink" x="20.5" y="16" width="3" height="12" fill="currentColor" stroke="none"/></svg>
+          <span class="sc-t">Creative &amp; Full Stack Code</span>
+          <span class="sc-d">Front-of-house interactivity to back-of-house infrastructure — the same house code that powers Orbit and The Cost of War.</span>
+          <span class="sc-more">( Learn more + )</span>
+        </button>
+        <button class="scard g3" data-svc="ai" data-cursor="view">
+          <svg class="icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 32L22 12l12 20M10 32l12-8 12 8" opacity=".45"/><circle class="i-p1" cx="10" cy="32" r="3" fill="currentColor" stroke="none"/><circle class="i-p2" cx="22" cy="12" r="3" fill="currentColor" stroke="none"/><circle class="i-p3" cx="34" cy="32" r="3" fill="currentColor" stroke="none"/><circle class="i-p4" cx="22" cy="24" r="3" fill="currentColor" stroke="none"/></svg>
+          <span class="sc-t">Creative AI Agent Implementation</span>
+          <span class="sc-d">Practical AI agents woven into experiences and workflows — purposeful, measurable, never a gimmick.</span>
+          <span class="sc-more">( Learn more + )</span>
+        </button>
       </div>
     </div>
 
@@ -846,15 +991,15 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
     <div class="clients">
       <p class="eyebrow">[ SERVING INDUSTRY LEADERS · A SELECT GROUP OF OUR VALUED PARTNERS ]</p>
       <div class="client-grid">
-        <div class="client">BBC Studios</div>
-        <div class="client">WB</div>
-        <div class="client">UAL</div>
-        <div class="client">West 13</div>
-        <div class="client">Supa Ninki</div>
-        <div class="client">Ludo</div>
-        <div class="client">XLL</div>
-        <div class="client">CRG</div>
-        <div class="client">LNU</div>
+        <div class="client"><img src="logos/bbc-studios.jpg" alt="BBC Studios" loading="lazy"></div>
+        <div class="client"><img src="logos/wb.png" alt="Warner Bros." loading="lazy"></div>
+        <div class="client"><img src="logos/ual.png" alt="UAL — London College of Fashion" loading="lazy"></div>
+        <div class="client"><img src="logos/west13.png" alt="West 13th" loading="lazy"></div>
+        <div class="client"><img src="logos/supa-ninki.png" alt="Supa Ninki" loading="lazy"></div>
+        <div class="client"><img src="logos/ludo.png" alt="Ludo" loading="lazy"></div>
+        <div class="client"><img src="logos/xll.png" alt="XL" loading="lazy"></div>
+        <div class="client"><img src="logos/crg.png" alt="Creative Research Group" loading="lazy"></div>
+        <div class="client"><img src="logos/lnu.png" alt="Live Nation Urban" loading="lazy"></div>
         <div class="client">Instituto Usiminas</div>
       </div>
     </div>
@@ -862,7 +1007,7 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
     <div class="collabs">
       <p class="eyebrow">[ COLLABORATORS ]</p>
       <div class="collab"><div class="cn">Narrative Engine</div><div class="cd">Co-creators of Orbit — smart event networking, product &amp; technology</div></div>
-      <div class="collab"><div class="cn">Blueprint</div><div class="cd">Co-creator of The Cost of War · artist behind Boy Without Balloon</div></div>
+      <div class="collab"><div class="cn"><img src="logos/blueprint.png" alt="" class="clogo-inline">Blueprint</div><div class="cd">Co-creator of The Cost of War · artist behind Boy Without Balloon</div></div>
       <div class="collab"><div class="cn">Thiago Santos</div><div class="cd">Photographer &amp; fine artist · Olha Pra Mim [Look at Me] — 4,000+ gazes, 10+ years</div></div>
     </div>
 
@@ -1019,6 +1164,19 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
 
 </main>
 
+<!-- service detail modal -->
+<div id="svc-modal" class="svc-modal" hidden>
+  <div class="svc-backdrop" id="svc-backdrop"></div>
+  <div class="svc-panel" id="svc-panel" role="dialog" aria-modal="true" aria-labelledby="svcm-title">
+    <button class="svc-close" id="svc-close">( Close × )</button>
+    <p class="eyebrow" id="svcm-eyebrow"></p>
+    <h3 class="editorial" id="svcm-title"></h3>
+    <p class="long" id="svcm-long"></p>
+    <ul class="dl" id="svcm-dl"></ul>
+    <a href="#join" class="btn primary" id="svcm-cta" data-cursor="join"><span class="rl"><span>( Get in touch )</span><span>( Get in touch )</span></span></a>
+  </div>
+</div>
+
 <footer>
   <div class="glowline"></div>
   <div class="fgrid">
@@ -1096,19 +1254,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
   });
 });
 
-/* ---------- entry sequence ---------- */
-var entry = document.getElementById('entry');
-if (REDUCED || sessionStorage.getItem('exEntrySeen')) {
-  entry.parentNode.removeChild(entry);
-} else {
-  sessionStorage.setItem('exEntrySeen','1');
-  var elines = entry.querySelectorAll('.entry-line');
-  var etl = gsap.timeline();
-  etl.to(elines, { opacity: 1, duration: 0.01, stagger: 0.36 })
-     .to(entry, { opacity: 0, duration: 0.5, delay: 0.55,
-        onComplete: function(){ if (entry.parentNode) entry.parentNode.removeChild(entry); } });
-  entry.addEventListener('click', function(){ etl.progress(1); });
-}
+/* ---------- entry sequence: orchestrated after the hero net is created ---------- */
 
 /* ---------- HUD: clock + connections ---------- */
 var hudClock = document.getElementById('hud-clock');
@@ -1180,6 +1326,7 @@ navCheck();
 
 /* ---------- headline line reveals ---------- */
 document.querySelectorAll('.reveal').forEach(function(h){
+  if (h.closest('#hero')) return; /* hero lines are revealed by the boot sequence */
   var lines = h.querySelectorAll('.line');
   if (REDUCED) return;
   gsap.set(lines, { yPercent: 110 });
@@ -1227,9 +1374,12 @@ function makeNet(canvas, opts){
   var ctx = canvas.getContext('2d');
   var o = {}, nodes = [], W = 0, H = 0, DPR = 1;
   var running = false, rafId = null, hover = null, ignited = 0, pathChain = null, pathT = 0;
+  var bootP = 1, bootStart = 0, bootDur = 1, pulses = [], pulseT = 0;
+  var youOn = false, youX = 0, youY = 0, pX = 0, pY = 0;
   var defaults = {
     count: 90, palette: NODE_COLORS, link: 130, speed: 0.25,
-    clusters: null, mode: 'drift', linkAlpha: 0.16, dotAlpha: 1, hoverable: false
+    clusters: null, mode: 'drift', linkAlpha: 0.16, dotAlpha: 1, hoverable: false,
+    pulses: false, you: false
   };
   function set(newOpts){
     for (var k in defaults) o[k] = (newOpts && newOpts[k] !== undefined) ? newOpts[k] : defaults[k];
@@ -1252,7 +1402,7 @@ function makeNet(canvas, opts){
         y = c[1] * H + (Math.random() - 0.5) * c[2] * H;
       } else { x = Math.random() * W; y = Math.random() * H; }
       nodes.push({
-        x: x, y: y,
+        x: x, y: y, hx: x, hy: y, sxp: x, syp: y,
         vx: (Math.random() - 0.5) * o.speed, vy: (Math.random() - 0.5) * o.speed,
         r: 1 + Math.random() * 2.1,
         c: o.palette[i % o.palette.length],
@@ -1268,6 +1418,37 @@ function makeNet(canvas, opts){
   }
   function step(){
     var i, n;
+    if (bootP < 1){
+      bootP = Math.min(1, (performance.now() - bootStart) / bootDur);
+      var be = 1 - Math.pow(1 - bootP, 3);
+      for (i = 0; i < nodes.length; i++){
+        n = nodes[i]; n.tw += 0.02;
+        n.x = n.sxp + (n.hx - n.sxp) * be;
+        n.y = n.syp + (n.hy - n.syp) * be;
+      }
+      return;
+    }
+    if (o.pulses && Math.random() < 0.022 && nodes.length > 1){
+      var pa = Math.floor(Math.random() * nodes.length);
+      for (i = 0; i < nodes.length; i++){
+        if (i === pa) continue;
+        var pdx = nodes[i].x - nodes[pa].x, pdy = nodes[i].y - nodes[pa].y;
+        if (pdx*pdx + pdy*pdy < o.link * o.link){ pulses.push({ a: pa, b: i, t: 0 }); break; }
+      }
+    }
+    for (i = pulses.length - 1; i >= 0; i--){ pulses[i].t += 0.02; if (pulses[i].t >= 1) pulses.splice(i, 1); }
+    if (o.you && youOn){
+      for (i = 0; i < nodes.length; i++){
+        n = nodes[i];
+        var rdx = n.x - youX, rdy = n.y - youY, rd2 = rdx*rdx + rdy*rdy;
+        if (rd2 < 4900 && rd2 > 1){
+          var rd = Math.sqrt(rd2);
+          n.vx += (rdx / rd) * 0.045; n.vy += (rdy / rd) * 0.045;
+        }
+        if (n.vx > 0.7) n.vx = 0.7; if (n.vx < -0.7) n.vx = -0.7;
+        if (n.vy > 0.7) n.vy = 0.7; if (n.vy < -0.7) n.vy = -0.7;
+      }
+    }
     for (i = 0; i < nodes.length; i++){
       n = nodes[i];
       n.tw += 0.02;
@@ -1324,7 +1505,7 @@ function makeNet(canvas, opts){
         var dx = n.x - m.x, dy = n.y - m.y;
         var d2 = dx*dx + dy*dy, L = o.link;
         if (d2 < L * L){
-          var a = (1 - Math.sqrt(d2) / L) * o.linkAlpha;
+          var a = (1 - Math.sqrt(d2) / L) * o.linkAlpha * bootP;
           ctx.strokeStyle = 'rgba(196,196,196,' + a.toFixed(3) + ')';
           ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y); ctx.stroke();
         }
@@ -1366,11 +1547,61 @@ function makeNet(canvas, opts){
     for (i = 0; i < nodes.length; i++){
       n = nodes[i];
       var twk = 0.72 + Math.sin(n.tw) * 0.28;
-      ctx.globalAlpha = o.dotAlpha * twk * n.life;
+      ctx.globalAlpha = o.dotAlpha * twk * n.life * (0.25 + 0.75 * bootP);
       ctx.fillStyle = n.c;
       ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fill();
     }
     ctx.globalAlpha = 1;
+    /* travelling connection pulses */
+    for (i = 0; i < pulses.length; i++){
+      var PU = pulses[i], PA = nodes[PU.a], PB = nodes[PU.b];
+      if (!PA || !PB) continue;
+      ctx.globalAlpha = (1 - PU.t) * 0.85;
+      ctx.fillStyle = '#F4F2EE';
+      ctx.beginPath();
+      ctx.arc(PA.x + (PB.x - PA.x) * PU.t, PA.y + (PB.y - PA.y) * PU.t, 1.8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    /* you — the visitor's node follows the cursor */
+    if (o.you && youOn){
+      youX += (pX - youX) * 0.14; youY += (pY - youY) * 0.14;
+      var near = [];
+      for (i = 0; i < nodes.length; i++){
+        var ydx = nodes[i].x - youX, ydy = nodes[i].y - youY, yd2 = ydx*ydx + ydy*ydy;
+        if (yd2 < 190 * 190) near.push([yd2, i]);
+      }
+      near.sort(function(q, w){ return q[0] - w[0]; });
+      ctx.lineWidth = 1;
+      for (i = 0; i < Math.min(4, near.length); i++){
+        var yn = nodes[near[i][1]];
+        var ya = (1 - Math.sqrt(near[i][0]) / 190) * 0.55 * bootP;
+        ctx.strokeStyle = 'rgba(255,90,77,' + ya.toFixed(3) + ')';
+        ctx.beginPath(); ctx.moveTo(youX, youY); ctx.lineTo(yn.x, yn.y); ctx.stroke();
+      }
+      ctx.beginPath(); ctx.arc(youX, youY, 3.2, 0, Math.PI * 2);
+      ctx.fillStyle = '#FF5A4D';
+      ctx.shadowColor = '#FF5A4D'; ctx.shadowBlur = 14;
+      ctx.fill(); ctx.shadowBlur = 0;
+      ctx.font = '500 9px "JetBrains Mono", monospace';
+      ctx.fillStyle = 'rgba(255,90,77,.9)';
+      ctx.fillText('YOU', youX + 10, youY - 8);
+    }
+    /* boot-complete pulse ring */
+    if (pulseT){
+      var pt = (performance.now() - pulseT) / 1400;
+      if (pt < 1){
+        var pcx = youOn ? youX : W / 2, pcy = youOn ? youY : H / 2;
+        ctx.beginPath(); ctx.arc(pcx, pcy, 8 + pt * 130, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255,90,77,' + (0.6 * (1 - pt)).toFixed(3) + ')';
+        ctx.lineWidth = 1.5; ctx.stroke();
+        if (pt < 0.35){
+          ctx.beginPath(); ctx.arc(pcx, pcy, 5, 0, Math.PI * 2);
+          ctx.fillStyle = '#FF5A4D'; ctx.shadowColor = '#FF5A4D'; ctx.shadowBlur = 20;
+          ctx.fill(); ctx.shadowBlur = 0;
+        }
+      } else pulseT = 0;
+    }
     /* ignition (join) */
     if (ignited){
       var t = (performance.now() - ignited) / 1500;
@@ -1411,6 +1642,18 @@ function makeNet(canvas, opts){
     play: function(){ if (REDUCED || running) return; running = true; loop(); },
     pause: function(){ running = false; if (rafId) cancelAnimationFrame(rafId); },
     ignite: function(){ ignited = performance.now(); if (REDUCED) draw(); },
+    boot: function(durSec){
+      if (REDUCED){ bootP = 1; draw(); return; }
+      bootDur = Math.max(50, durSec * 1000); bootStart = performance.now(); bootP = 0.0001;
+      nodes.forEach(function(n){
+        n.sxp = n.hx + (Math.random() - 0.5) * W * 1.4;
+        n.syp = n.hy + (Math.random() - 0.5) * H * 1.4;
+        n.x = n.sxp; n.y = n.syp;
+      });
+    },
+    ignitePulse: function(){ pulseT = performance.now(); if (REDUCED) draw(); },
+    setPointer: function(x, y){ pX = x; pY = y; if (!youOn){ youOn = true; youX = x; youY = y; } },
+    clearPointer: function(){ youOn = false; },
     resize: function(){ resize(); seed(); if (REDUCED) draw(); },
     hoverAt: function(x, y){
       var best = null, bd = 60 * 60;
@@ -1435,17 +1678,20 @@ function makeNet(canvas, opts){
   return api;
 }
 
-/* ---------- hero constellation + hover tag ---------- */
-var heroNet = makeNet(document.getElementById('hero-canvas'), {
-  count: Math.min(150, Math.floor(innerWidth / 11)), link: 135, speed: 0.28, linkAlpha: 0.15, hoverable: true
+/* ---------- hero constellation: you are a node ---------- */
+var heroCanvas = document.getElementById('hero-canvas');
+var heroNet = makeNet(heroCanvas, {
+  count: Math.min(150, Math.floor(innerWidth / 11)), link: 135, speed: 0.28,
+  linkAlpha: 0.15, hoverable: true, pulses: true, you: !TOUCH
 });
 heroNet.play();
 if (!TOUCH){
-  var heroCanvas = document.getElementById('hero-canvas');
   var heroTag = document.getElementById('hero-tag');
   heroCanvas.addEventListener('mousemove', function(e){
     var r = heroCanvas.getBoundingClientRect();
-    var hit = heroNet.hoverAt(e.clientX - r.left, e.clientY - r.top);
+    var cx = e.clientX - r.left, cy = e.clientY - r.top;
+    heroNet.setPointer(cx, cy);
+    var hit = heroNet.hoverAt(cx, cy);
     if (hit){
       heroTag.textContent = 'NODE ' + (4000 + hit.idx * 7) + ' · ' + hit.node.deg + ' DEGREES FROM YOU';
       heroTag.style.left = (hit.node.x) + 'px';
@@ -1453,7 +1699,92 @@ if (!TOUCH){
       heroTag.style.opacity = 1;
     } else { heroTag.style.opacity = 0; }
   });
-  heroCanvas.addEventListener('mouseleave', function(){ heroNet.clearHover(); heroTag.style.opacity = 0; });
+  heroCanvas.addEventListener('mouseleave', function(){
+    heroNet.clearHover(); heroNet.clearPointer(); heroTag.style.opacity = 0;
+  });
+}
+
+/* ---------- entry: typed network boot, synced with the constellation ---------- */
+var entry = document.getElementById('entry');
+var heroBits = [document.querySelector('.hero-content .eyebrow'),
+                document.querySelector('.hero-content .sub'),
+                document.querySelector('.scroll-cue')];
+var heroLines = document.querySelectorAll('#hero .line');
+var entryDone = false;
+function finishEntry(){
+  if (entryDone) return; entryDone = true;
+  heroNet.ignitePulse();
+  if (entry && entry.parentNode){
+    gsap.to(entry, { opacity: 0, duration: 0.45,
+      onComplete: function(){ if (entry.parentNode) entry.parentNode.removeChild(entry); } });
+  }
+  gsap.to(heroBits, { opacity: 1, duration: 0.8, stagger: 0.1, delay: 0.2, overwrite: true });
+  gsap.to(nav, { opacity: 1, duration: 0.8, delay: 0.35, overwrite: true });
+  gsap.to(heroLines, { yPercent: 0, duration: 0.95, ease: 'power3.out', stagger: 0.1, delay: 0.1, overwrite: true });
+  heroLines.forEach(function(l, i){ setTimeout(function(){ l.classList.add('lit'); }, i * 100 + 260); });
+}
+if (REDUCED){
+  if (entry && entry.parentNode) entry.parentNode.removeChild(entry);
+} else {
+  var SEEN = sessionStorage.getItem('exEntrySeen');
+  sessionStorage.setItem('exEntrySeen', '1');
+  gsap.set(heroBits, { opacity: 0 });
+  gsap.set(nav, { opacity: 0 });
+  gsap.set(heroLines, { yPercent: 110 });
+  if (SEEN){
+    if (entry && entry.parentNode) entry.parentNode.removeChild(entry);
+    heroNet.boot(1.1);
+    setTimeout(finishEntry, 620);
+  } else {
+    heroNet.boot(2.7);
+    var elog = document.getElementById('entry-log');
+    var TLINES = [
+      [['ESTABLISHING NETWORK…', false]],
+      [['SCANNING ', false], [fmt(conn) + ' CONNECTIONS', false]],
+      [['RESOLVING CONSTELLATION', false]],
+      [['NODE ASSIGNED: ', false], ['YOU', true]]
+    ];
+    var caret = document.createElement('span'); caret.className = 'entry-caret';
+    var tLi = 0, tSi = 0, tCi = 0, curLine = null, curSeg = null, skipped = false;
+    function newSeg(coral){
+      curSeg = document.createElement('span');
+      if (coral) curSeg.className = 'coral';
+      curLine.appendChild(curSeg);
+      curLine.appendChild(caret);
+    }
+    function typeStep(){
+      if (skipped) return;
+      if (tLi >= TLINES.length){
+        if (caret.parentNode) caret.parentNode.removeChild(caret);
+        setTimeout(finishEntry, 340);
+        return;
+      }
+      if (!curLine){
+        curLine = document.createElement('p'); curLine.className = 'entry-line';
+        curLine.appendChild(document.createTextNode('> '));
+        elog.appendChild(curLine);
+        tSi = 0; tCi = 0; newSeg(TLINES[tLi][0][1]);
+      }
+      var seg = TLINES[tLi][tSi];
+      if (tCi < seg[0].length){
+        curSeg.textContent += seg[0].charAt(tCi); tCi++;
+        setTimeout(typeStep, 17);
+      } else if (tSi < TLINES[tLi].length - 1){
+        tSi++; tCi = 0; newSeg(TLINES[tLi][tSi][1]);
+        setTimeout(typeStep, 17);
+      } else {
+        tLi++; curLine = null;
+        setTimeout(typeStep, 300);
+      }
+    }
+    setTimeout(typeStep, 380);
+    gsap.to(entry, { backgroundColor: 'rgba(10,10,15,0)', duration: 0.7, delay: 0.25 });
+    entry.addEventListener('click', function(){
+      skipped = true;
+      heroNet.boot(0.05);
+      finishEntry();
+    });
+  }
 }
 
 /* ---------- blue flood wipes ---------- */
@@ -1603,6 +1934,79 @@ wlForm.addEventListener('submit', function(e){
   wlForm.querySelector('button').style.pointerEvents = 'none';
   wlNote.innerHTML = 'YOU\'RE ON THE LIST — TEST BUILD, NOTHING WAS SENT. THE REAL WAITLIST IS LIVE AT <a href="https://www.studioex.co" target="_blank" rel="noopener">STUDIOEX.CO</a>';
   conn += 1; renderConn();
+});
+
+/* ---------- service cards + learn-more modal ---------- */
+var SVC = {
+  gd:   { g: 1, label: 'CONTENT CREATION', title: 'Graphic Design',
+          long: 'From identity systems to campaign artwork, we design the visual language that carries your project — and keep it consistent from the first proposal to the printed wall vinyl. Every mark is drawn to work across screen, print and space.',
+          dl: ['Brand marks & identity', 'Campaign & exhibition graphics', 'Print & large-format artwork', 'Social & digital assets'] },
+  dt:   { g: 1, label: 'CONTENT CREATION', title: 'Digital & Traditional Creative',
+          long: 'Content made for wherever your audience actually is — a feed, a facade, a gallery wall. We produce screen-first and physical-first creative from one idea, so the story stays coherent across every surface.',
+          dl: ['Digital content & motion', 'Print & out-of-home creative', 'Campaign concepts', 'Content systems & templates'] },
+  xd:   { g: 1, label: 'CONTENT CREATION', title: 'Experiential Design',
+          long: 'We design the journey, not just the room: arrival, threshold, reveal, participation, exit. Spatial narratives and visitor flows that turn square metres into story beats.',
+          dl: ['Visitor journey mapping', 'Exhibition & set design', 'Spatial narrative', 'Wayfinding & interpretation'] },
+  pm:   { g: 1, label: 'CONTENT CREATION', title: 'Projection Mapping',
+          long: 'Buildings, sets, sculptures and stages become moving canvases. We handle survey, content, warping and show control — from a single object to a full architectural facade.',
+          dl: ['Architectural & object mapping', 'Content production', 'Site survey & technical spec', 'Show control & playback'] },
+  av:   { g: 1, label: 'CONTENT CREATION', title: 'AudioVisual',
+          long: 'Sound and vision engineered together. We specify, source and program the AV backbone of an experience — and make the content that runs on it.',
+          dl: ['AV system design & spec', 'Sound design & spatial audio', 'Screen & LED content', 'Install & commissioning'] },
+  cad:  { g: 1, label: 'CONTENT CREATION', title: 'CAD Modelling',
+          long: 'Build-ready models and technical drawings that take a concept from a sketch to something a fabricator can price and build. We model for planning, visualisation and manufacture.',
+          dl: ['3D models & visualisation', 'Technical & fabrication drawings', 'Planning & venue packs', 'Prototype files'] },
+  rs:   { g: 2, label: 'STRATEGY & CREATIVE DIRECTION', title: 'Research & Strategy',
+          long: 'Audience, market and cultural research that grounds creative decisions in evidence — who it is for, why it matters, what it must achieve. The thinking that stops a beautiful thing being the wrong thing.',
+          dl: ['Audience & market research', 'Cultural & trend analysis', 'Creative strategy', 'Measurement frameworks'] },
+  pd:   { g: 2, label: 'STRATEGY & CREATIVE DIRECTION', title: 'Proposals & Pitch Deck Design',
+          long: 'Investor- and client-grade decks: the narrative, the design and the numbers behind them. We raise for our own products — so we build proposals the way we would want to receive them.',
+          dl: ['Pitch & investor decks', 'Project proposals', 'Budgets & timelines', 'Supporting collateral'] },
+  cp:   { g: 2, label: 'STRATEGY & CREATIVE DIRECTION', title: 'Concept & Product Development',
+          long: 'From first spark to tested concept: storyboards, prototypes and a roadmap to build against. We pressure-test ideas early, so the expensive stage starts with proof.',
+          dl: ['Concept development', 'Storyboards & prototypes', 'Feasibility & roadmap', 'Pilot & test plans'] },
+  br:   { g: 2, label: 'STRATEGY & CREATIVE DIRECTION', title: 'Branding',
+          long: 'Naming, identity systems and guidelines built to survive contact with the real world — from a founder\'s deck to the side of a building. Made to be used, not framed.',
+          dl: ['Naming & positioning', 'Identity systems', 'Brand guidelines', 'Rollout & templates'] },
+  code: { g: 3, label: 'INTERACTIVE TECHNOLOGY', title: 'Creative & Full Stack Code',
+          long: 'From front-of-house interactivity to back-of-house infrastructure — the same in-house code that powers Orbit and The Cost of War. Web, installations and real-time data, owned end to end.',
+          dl: ['Web & platform build', 'Real-time & installation code', 'Data & backend infrastructure', 'Maintenance & support'] },
+  ai:   { g: 3, label: 'INTERACTIVE TECHNOLOGY', title: 'Creative AI Agent Implementation',
+          long: 'Practical AI agents woven into experiences and workflows — content pipelines, visitor interaction, operations. Purposeful and measurable, never a gimmick.',
+          dl: ['Agent design & integration', 'Content & workflow automation', 'Visitor-facing AI interaction', 'Evaluation & guardrails'] }
+};
+var GCOL = { 1: '#3FC9E8', 2: '#FFB84D', 3: '#8E5CF6' };
+var svcModal = document.getElementById('svc-modal');
+var svcPanel = document.getElementById('svc-panel');
+function openSvc(id){
+  var d = SVC[id]; if (!d) return;
+  svcPanel.style.setProperty('--c', GCOL[d.g]);
+  document.getElementById('svcm-eyebrow').textContent = '[ LAB EX · ' + d.label + ' ]';
+  document.getElementById('svcm-title').textContent = d.title;
+  document.getElementById('svcm-long').textContent = d.long;
+  var dl = document.getElementById('svcm-dl');
+  dl.innerHTML = '';
+  d.dl.forEach(function(x){
+    var li = document.createElement('li'); li.textContent = x; dl.appendChild(li);
+  });
+  svcModal.hidden = false;
+  if (lenis) lenis.stop();
+  if (!REDUCED) gsap.fromTo(svcPanel, { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: 'power2.out' });
+}
+function closeSvc(){
+  svcModal.hidden = true;
+  if (lenis) lenis.start();
+}
+document.querySelectorAll('.scard').forEach(function(c){
+  c.addEventListener('click', function(){ openSvc(c.getAttribute('data-svc')); });
+});
+document.getElementById('svc-close').addEventListener('click', closeSvc);
+document.getElementById('svc-backdrop').addEventListener('click', closeSvc);
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !svcModal.hidden) closeSvc(); });
+document.getElementById('svcm-cta').addEventListener('click', function(){
+  closeSvc();
+  var join = document.getElementById('join');
+  if (lenis) lenis.scrollTo(join); else join.scrollIntoView();
 });
 
 /* ---------- refresh after everything settles ---------- */
