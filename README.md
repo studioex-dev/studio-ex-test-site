@@ -25,6 +25,15 @@ You arrive as a node, scrolling traverses the network, and the closing form
   Our Artists (Blueprint, Thiago Santos) + become-an-artist call, "We Work
   Everywhere", purpose copy, credits (Narrative Engine, Blueprint), and the
   real contact details (greg@studioex.co / WhatsApp / +44 771 564 3569).
+- Lab EX services section from the live "Our Services" page: three service
+  groups (Visual & Experiential Design, Strategy & Creative Direction,
+  Interactive Technology) with a described line per service, the four-step
+  How We Work process, the Serving Industry Leaders client grid (names read
+  from the live site's logo files — verify: BBC Studios, WB, UAL, West 13,
+  Supa Ninki, Ludo, XLL, CRG, LNU, Instituto Usiminas), collaborators
+  (Narrative Engine, Blueprint, Thiago Santos), and the real team from the
+  About page (Gregory Taylor, David Rickmann, Daniel Atherton, Jason Davey,
+  Steven Sprague) plus the five core principles.
 
 ## Run it
 

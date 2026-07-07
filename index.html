@@ -442,6 +442,58 @@ body > footer{padding:0 0 46px;background:var(--ink)}
 }
 .contact-rows a:hover{color:var(--coral)}
 
+/* ============ SERVICES (LAB EX) ============ */
+#services{padding:20vh 0 16vh;border-top:1px solid var(--hairline)}
+#services h2{max-width:13em}
+#services > .wrap > .sub{margin-top:34px}
+.svc-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:10vh}
+.svc{border:1px solid var(--hairline);padding:30px 28px 22px;position:relative;background:#0d0d14}
+.svc .notch{
+  position:absolute;right:-1px;top:26px;width:12px;height:12px;background:var(--ink);
+  border-left:1px solid rgba(244,242,238,.22);border-bottom:1px solid rgba(244,242,238,.22);
+}
+.svc .lead{font-family:var(--mono);font-size:10px;color:var(--coral);letter-spacing:.14em;text-transform:uppercase}
+.svc-title{font-size:clamp(1.15rem,1.5vw,1.45rem);font-weight:900;text-transform:uppercase;letter-spacing:-.01em;margin:14px 0 8px}
+.svc .whatfor{font-size:.92rem;color:var(--grey2);font-weight:600;line-height:1.5;margin-bottom:24px}
+.svc-item{padding:14px 0;border-top:1px solid var(--hairline)}
+.svc-item .si-t{font-weight:800;font-size:.98rem;text-transform:uppercase}
+.svc-item .si-d{margin-top:6px;font-size:.88rem;color:var(--grey);font-weight:600;line-height:1.55}
+.how{margin-top:14vh}
+.how .hint{font-family:var(--mono);font-size:10px;color:var(--grey);letter-spacing:.14em;text-transform:uppercase;margin-top:14px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:40px}
+.step{border-top:1px solid var(--hairline);padding-top:18px}
+.step .n{font-family:var(--mono);font-size:10px;color:var(--coral);letter-spacing:.12em;display:block;margin-bottom:12px}
+.step .t{font-weight:900;text-transform:uppercase;font-size:clamp(1rem,1.2vw,1.15rem);letter-spacing:-.01em}
+.step p{margin-top:8px;font-size:.9rem;color:var(--grey2);font-weight:600;line-height:1.5}
+.clients{margin-top:14vh}
+.client-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);margin-top:32px;
+  border-top:1px solid var(--hairline);border-left:1px solid var(--hairline);
+}
+.client{
+  border-right:1px solid var(--hairline);border-bottom:1px solid var(--hairline);
+  padding:36px 12px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--grey2);
+  text-transform:uppercase;text-align:center;transition:color .3s;
+}
+.client:hover{color:var(--paper)}
+.collabs{margin-top:12vh}
+.collab{
+  display:grid;grid-template-columns:minmax(180px,240px) 1fr;gap:10px 30px;
+  padding:18px 0;border-top:1px solid var(--hairline);align-items:baseline;
+}
+.collab:last-child{border-bottom:1px solid var(--hairline)}
+.collab .cn{font-weight:900;text-transform:uppercase;font-size:1.05rem}
+.collab .cd{font-family:var(--mono);font-size:10px;color:var(--grey);letter-spacing:.1em;text-transform:uppercase;line-height:1.9}
+.svc-cta{margin-top:14vh;display:flex;flex-wrap:wrap;align-items:center;gap:20px 40px}
+.svc-cta p{font-size:clamp(1.2rem,2vw,1.7rem);font-weight:800;letter-spacing:-.01em;max-width:22em}
+
+/* ============ TEAM (WORLD B) ============ */
+.team{display:grid;grid-template-columns:repeat(5,1fr);gap:26px 20px;margin-top:9vh}
+.tm .tn{font-weight:900;text-transform:uppercase;font-size:clamp(.95rem,1.1vw,1.05rem);color:var(--white);letter-spacing:-.01em}
+.tm .tr{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--blue-tint);text-transform:uppercase;margin-top:7px;line-height:1.7}
+.team-note{margin-top:34px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--blue-tint);text-transform:uppercase;line-height:2}
+
 /* ============ REDUCED MOTION / STATIC ============ */
 body.reduced .line{transform:none !important}
 body.reduced .flood-curtain{transform:none}
@@ -475,6 +527,11 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
   .quotes{grid-template-columns:1fr 1fr}
   .wheres{grid-template-columns:1fr 1fr;gap:30px 20px}
   .artists{grid-template-columns:1fr;gap:44px}
+  .svc-groups{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr;gap:30px 20px}
+  .client-grid{grid-template-columns:repeat(3,1fr)}
+  .collab{grid-template-columns:1fr}
+  .team{grid-template-columns:1fr 1fr;gap:30px 20px}
 }
 </style>
 </head>
@@ -500,6 +557,7 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
   <nav>
     <a href="#work">Work</a>
     <a href="#waitlist">Waitlist</a>
+    <a href="#services">Services</a>
     <a href="#studio">Studio</a>
     <a href="#model-manifesto">Model</a>
     <a href="#join">Contact</a>
@@ -730,10 +788,95 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
   </div>
 </section>
 
+<!-- lab ex — services for hire -->
+<section id="services">
+  <div class="wrap">
+    <p class="eyebrow">[ 05 / LAB EX · THE STUDIO FOR HIRE ]</p>
+    <h2 class="reveal">
+      <span class="mask"><span class="line">HELPING YOU BRING LIFE</span></span>
+      <span class="mask"><span class="line">TO <em>ANY PROJECT</em>.</span></span>
+    </h2>
+    <p class="sub">Proposals, research, design, strategy, execution and more. Scalable interactive experiences and artwork for your brand, in your space — from live exhibitions to permanent installations, tailored to your objectives, your specifications, your brief.</p>
+    <p class="sub">Have a project, an artwork or a space in mind? Let's make something unforgettable.</p>
+
+    <div class="svc-groups">
+      <div class="svc">
+        <div class="notch"></div>
+        <span class="lead">[ 01 · CONTENT CREATION ]</span>
+        <h4 class="svc-title">Visual &amp; Experiential Design</h4>
+        <p class="whatfor">The things people see, touch and walk through.</p>
+        <div class="svc-item"><div class="si-t">Graphic Design</div><p class="si-d">Identity, print and campaign design that carries a concept from first sketch to finished artwork.</p></div>
+        <div class="svc-item"><div class="si-t">Digital &amp; Traditional Creative</div><p class="si-d">Screen-first or physical-first — content made for wherever your audience actually is.</p></div>
+        <div class="svc-item"><div class="si-t">Experiential Design</div><p class="si-d">Spatial narratives, exhibition design and visitor journeys that turn a space into a story.</p></div>
+        <div class="svc-item"><div class="si-t">Projection Mapping</div><p class="si-d">Architectural and object mapping that turns buildings, sets and sculptures into moving canvases.</p></div>
+        <div class="svc-item"><div class="si-t">AudioVisual</div><p class="si-d">Sound and vision engineered together — content, hardware specification and show control.</p></div>
+        <div class="svc-item"><div class="si-t">CAD Modelling</div><p class="si-d">Build-ready 3D models and technical drawings for fabrication, planning and install.</p></div>
+      </div>
+      <div class="svc">
+        <div class="notch"></div>
+        <span class="lead">[ 02 · DIRECTION ]</span>
+        <h4 class="svc-title">Strategy &amp; Creative Direction</h4>
+        <p class="whatfor">The thinking before the making.</p>
+        <div class="svc-item"><div class="si-t">Research &amp; Strategy</div><p class="si-d">Audience, market and cultural research that grounds every creative decision in evidence.</p></div>
+        <div class="svc-item"><div class="si-t">Proposals &amp; Pitch Deck Design</div><p class="si-d">Investor- and client-grade decks — the narrative, the design and the numbers behind them.</p></div>
+        <div class="svc-item"><div class="si-t">Concept &amp; Product Development</div><p class="si-d">From first spark to tested concept: storyboards, prototypes and a roadmap to build against.</p></div>
+        <div class="svc-item"><div class="si-t">Branding</div><p class="si-d">Naming, identity systems and guidelines built to survive contact with the real world.</p></div>
+      </div>
+      <div class="svc">
+        <div class="notch"></div>
+        <span class="lead">[ 03 · TECHNOLOGY ]</span>
+        <h4 class="svc-title">Interactive Technology</h4>
+        <p class="whatfor">The engine underneath — built in-house, owned end to end.</p>
+        <div class="svc-item"><div class="si-t">Creative &amp; Full Stack Code</div><p class="si-d">From front-of-house interactivity to back-of-house infrastructure — the same house code that powers Orbit and The Cost of War.</p></div>
+        <div class="svc-item"><div class="si-t">Creative AI Agent Implementation</div><p class="si-d">Practical AI agents woven into experiences and workflows — purposeful, measurable, never a gimmick.</p></div>
+      </div>
+    </div>
+
+    <div class="how">
+      <p class="eyebrow">[ HOW WE WORK ]</p>
+      <h3 class="editorial">Every project is unique. Iteration is key.</h3>
+      <div class="steps">
+        <div class="step"><span class="n">STEP 01 — DISCOVERY</span><span class="t">We listen</span><p>We listen, research, and define the creative potential.</p></div>
+        <div class="step"><span class="n">STEP 02 — DESIGN &amp; DIRECTION</span><span class="t">We shape</span><p>We concept, storyboard, and prototype.</p></div>
+        <div class="step"><span class="n">STEP 03 — DEVELOP &amp; BUILD</span><span class="t">We make</span><p>We co-produce and deliver high-impact experiences.</p></div>
+        <div class="step"><span class="n">STEP 04 — ENGAGEMENT &amp; INSIGHT</span><span class="t">We learn</span><p>We track, learn, report, and evolve the audience response.</p></div>
+      </div>
+    </div>
+
+    <div class="clients">
+      <p class="eyebrow">[ SERVING INDUSTRY LEADERS · A SELECT GROUP OF OUR VALUED PARTNERS ]</p>
+      <div class="client-grid">
+        <div class="client">BBC Studios</div>
+        <div class="client">WB</div>
+        <div class="client">UAL</div>
+        <div class="client">West 13</div>
+        <div class="client">Supa Ninki</div>
+        <div class="client">Ludo</div>
+        <div class="client">XLL</div>
+        <div class="client">CRG</div>
+        <div class="client">LNU</div>
+        <div class="client">Instituto Usiminas</div>
+      </div>
+    </div>
+
+    <div class="collabs">
+      <p class="eyebrow">[ COLLABORATORS ]</p>
+      <div class="collab"><div class="cn">Narrative Engine</div><div class="cd">Co-creators of Orbit — smart event networking, product &amp; technology</div></div>
+      <div class="collab"><div class="cn">Blueprint</div><div class="cd">Co-creator of The Cost of War · artist behind Boy Without Balloon</div></div>
+      <div class="collab"><div class="cn">Thiago Santos</div><div class="cd">Photographer &amp; fine artist · Olha Pra Mim [Look at Me] — 4,000+ gazes, 10+ years</div></div>
+    </div>
+
+    <div class="svc-cta">
+      <p>Got an idea, a brief, or just a feeling? Let's bring it to life.</p>
+      <a href="#join" class="btn primary" data-cursor="join"><span class="rl"><span>( Get in touch )</span><span>( Get in touch )</span></span></a>
+    </div>
+  </div>
+</section>
+
 <!-- 06 · THE NUMBERS -->
 <section id="numbers">
   <div class="wrap">
-    <p class="eyebrow">[ 05 / THE NUMBERS ]</p>
+    <p class="eyebrow">[ 06 / THE NUMBERS ]</p>
     <h2 class="editorial">Proof, delivered as motion.</h2>
   </div>
   <div class="stats">
@@ -769,7 +912,7 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
   <div class="flood-curtain"></div>
   <div class="flood-content">
     <div class="inner">
-      <p class="eyebrow">[ 06 / THE STUDIO · IMPACT DRIVEN ]</p>
+      <p class="eyebrow">[ 07 / THE STUDIO · IMPACT DRIVEN ]</p>
       <h2 class="reveal">
         <span class="mask"><span class="line">EVERYONE HAS A VOICE.</span></span>
         <span class="mask"><span class="line">USE IT FOR <em>GOOD</em>.</span></span>
@@ -785,6 +928,15 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
         </blockquote>
       </div>
       <p class="adv">We create immersive, tech-driven experiences with a purpose: to connect, inspire and drive positive change. Our work champions inclusivity, sustainability and social progress — sparking meaningful dialogue and leaving a lasting impact.</p>
+      <p class="looking">5 CORE PRINCIPLES: <b>SUSTAIN · PURPOSE · RESEARCH · CONNECT · EVOLVE</b></p>
+      <div class="team">
+        <div class="tm"><div class="tn">Gregory Taylor</div><div class="tr">Founder &amp; Director</div></div>
+        <div class="tm"><div class="tn">David Rickmann</div><div class="tr">Technology Lead · Creative coding, creative technology, audiovisual, projection mapping</div></div>
+        <div class="tm"><div class="tn">Daniel Atherton</div><div class="tr">Front-end Developer</div></div>
+        <div class="tm"><div class="tn">Jason Davey</div><div class="tr">Full Stack Developer</div></div>
+        <div class="tm"><div class="tn">Steven Sprague</div><div class="tr">Head of Marketing</div></div>
+      </div>
+      <p class="team-note">PLUS ARTISTS &amp; CREATIVES SPANNING: GRAPHIC DESIGN · 3D DESIGN · ILLUSTRATION · CAD MODELLING · ENGINEERING · SPATIAL DESIGN · BRANDING · WRITING</p>
       <div class="artists">
         <div class="artist">
           <p class="eyebrow">[ OUR ARTISTS · 01 ]</p>
@@ -820,7 +972,7 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
 <section id="close" class="world-b flood">
   <div class="flood-curtain"></div>
   <div class="flood-content inner">
-    <p class="eyebrow">[ 07 / THE INVITATION ]</p>
+    <p class="eyebrow">[ 08 / THE INVITATION ]</p>
     <h2 class="reveal">
       <span class="mask"><span class="line"><em>TOGETHER</em>, LET'S CREATE</span></span>
       <span class="mask"><span class="line">THE EXTRAORDINARY!</span></span>
@@ -833,7 +985,7 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
 <section id="join">
   <canvas id="join-canvas"></canvas>
   <div class="join-card">
-    <p class="eyebrow">[ 08 / JOIN THE NETWORK ]</p>
+    <p class="eyebrow">[ 09 / JOIN THE NETWORK ]</p>
     <h3 class="editorial">Your node is waiting.</h3>
     <p class="sub">Tell us who you are. Your node lights up — and the network grows by one.</p>
     <form id="join-form" autocomplete="off">
@@ -887,6 +1039,7 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
       <div class="ft">Site</div>
       <a href="#work">Work</a>
       <a href="#waitlist">Waitlist</a>
+      <a href="#services">Services</a>
       <a href="#studio">Studio</a>
       <a href="#model-manifesto">Model</a>
       <a href="#join">Contact</a>
