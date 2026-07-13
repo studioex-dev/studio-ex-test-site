@@ -93,16 +93,30 @@ body.has-cursor input,body.has-cursor textarea,body.has-cursor label{cursor:none
 /* ============ ENTRY ============ */
 #entry{
   position:fixed;inset:0;z-index:700;background:var(--ink);
-  display:flex;align-items:center;justify-content:center;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
 }
+#entry::before{
+  content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.02) 0 1px,transparent 1px 3px);
+}
+.entry-core{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:22px}
+.entry-sync{display:flex;align-items:baseline;gap:14px;font-family:var(--mono)}
+.entry-sync .es-label{font-size:11px;letter-spacing:.34em;color:var(--grey)}
+.entry-sync .es-val{
+  font-size:clamp(48px,8vw,74px);font-weight:700;color:var(--paper);line-height:.85;
+  letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+}
+.entry-sync .es-pct{font-size:20px;color:var(--coral);font-weight:500}
+.entry-bar{width:min(340px,74vw);height:2px;background:rgba(244,242,238,.12);overflow:hidden}
+.entry-bar i{display:block;height:100%;width:0;background:var(--coral);box-shadow:0 0 12px var(--coral)}
 .entry-log{
-  font-family:var(--mono);font-size:13px;letter-spacing:.1em;color:var(--grey2);
-  line-height:2.5;min-width:min(430px,84vw);
+  font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--grey2);
+  line-height:2.1;min-width:min(340px,74vw);min-height:5em;
 }
-.entry-line{min-height:2.5em}
+.entry-line{min-height:2.1em}
 .entry-line .coral{color:var(--coral)}
 .entry-caret{
-  display:inline-block;width:8px;height:14px;background:var(--coral);
+  display:inline-block;width:8px;height:13px;background:var(--coral);
   vertical-align:-2px;margin-left:5px;animation:caret .7s steps(2) infinite;
 }
 @keyframes caret{50%{opacity:0}}
@@ -181,6 +195,10 @@ section{position:relative}
 /* ============ HERO ============ */
 #hero{height:100vh;min-height:640px;overflow:hidden}
 #hero canvas{position:absolute;inset:0;width:100%;height:100%}
+#hero::after{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 95% 85% at 32% 48%, transparent 42%, rgba(10,10,15,.6) 100%);
+}
 .hero-content{
   position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;
   justify-content:center;padding:0 6vw;pointer-events:none;
@@ -619,7 +637,11 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
 
 <!-- entry sequence -->
 <div id="entry" aria-hidden="true">
-  <div class="entry-log" id="entry-log"></div>
+  <div class="entry-core">
+    <div class="entry-sync"><span class="es-label">SYNC</span><span class="es-val" id="entry-sync">000</span><span class="es-pct">%</span></div>
+    <div class="entry-bar"><i id="entry-bar"></i></div>
+    <div class="entry-log" id="entry-log"></div>
+  </div>
   <div class="entry-skip">Click to skip</div>
 </div>
 
@@ -841,7 +863,7 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
       <input id="wl-email" type="email" required placeholder="you@example.com" aria-label="Email address">
       <button class="btn primary" type="submit" data-cursor="join"><span class="rl"><span>( Join the waitlist )</span><span>( Join the waitlist )</span></span></button>
     </form>
-    <p class="footnote" id="wl-note">TEST BUILD — THE REAL WAITLIST IS LIVE AT <a href="https://www.studioex.co" target="_blank" rel="noopener">STUDIOEX.CO</a></p>
+    <p class="footnote" id="wl-note">TEST BUILD — TO JOIN THE WAITLIST FOR REAL, EMAIL <a href="mailto:info@in-orbit.co">INFO@IN-ORBIT.CO</a></p>
     <div class="quotes">
       <div class="quote"><p>"The most collaborative piece of art ever made."</p><span>Industry CEO</span></div>
       <div class="quote"><p>"A truly insane and radical new concept."</p><span>Early Adopter</span></div>
@@ -1151,10 +1173,10 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
     <div class="join-success" aria-live="polite">
       <p class="eyebrow on">[ NODE IGNITED ]</p>
       <h3 class="editorial">Welcome to the <em>network</em>.</h3>
-      <p class="footnote">TEST BUILD — NOTHING WAS SENT ANYWHERE. THE PRODUCTION FORM WILL CONNECT FOR REAL.</p>
+      <p class="footnote">TEST BUILD — NOTHING WAS SENT ANYWHERE. TO REACH US FOR REAL, EMAIL <a href="mailto:info@in-orbit.co">INFO@IN-ORBIT.CO</a>.</p>
     </div>
     <div class="contact-rows">
-      <a href="mailto:greg@studioex.co">greg@studioex.co</a>
+      <a href="mailto:info@in-orbit.co">info@in-orbit.co</a>
       <a href="https://wa.me/447715643569" target="_blank" rel="noopener">WhatsApp ↗</a>
       <a href="tel:+447715643569">+44 771 564 3569</a>
       <span>London, United Kingdom</span>
@@ -1204,7 +1226,7 @@ body.reduced .bar i,body.reduced .frow .fb{transform:scaleX(1) !important}
     </div>
     <div class="fcol">
       <div class="ft">Contact</div>
-      <a href="mailto:greg@studioex.co">greg@studioex.co</a>
+      <a href="mailto:info@in-orbit.co">info@in-orbit.co</a>
       <a href="https://wa.me/447715643569" target="_blank" rel="noopener">WhatsApp ↗</a>
       <a href="tel:+447715643569">+44 771 564 3569</a>
       <span>London, United Kingdom</span>
@@ -1374,12 +1396,13 @@ function makeNet(canvas, opts){
   var ctx = canvas.getContext('2d');
   var o = {}, nodes = [], W = 0, H = 0, DPR = 1;
   var running = false, rafId = null, hover = null, ignited = 0, pathChain = null, pathT = 0;
-  var bootP = 1, bootStart = 0, bootDur = 1, pulses = [], pulseT = 0;
+  var bootP = 1, bootStart = 0, bootDur = 1, pulses = [], pulseT = 0, radarOn = false, sweep = 0;
   var youOn = false, youX = 0, youY = 0, pX = 0, pY = 0;
+  var camX = 0, camY = 0, camTX = 0, camTY = 0, zoom = 1, zoomT = 1, order = [];
   var defaults = {
     count: 90, palette: NODE_COLORS, link: 130, speed: 0.25,
     clusters: null, mode: 'drift', linkAlpha: 0.16, dotAlpha: 1, hoverable: false,
-    pulses: false, you: false
+    pulses: false, you: false, depth: false, camera: false, radar: false
   };
   function set(newOpts){
     for (var k in defaults) o[k] = (newOpts && newOpts[k] !== undefined) ? newOpts[k] : defaults[k];
@@ -1401,10 +1424,16 @@ function makeNet(canvas, opts){
         x = c[0] * W + (Math.random() - 0.5) * c[2] * W;
         y = c[1] * H + (Math.random() - 0.5) * c[2] * H;
       } else { x = Math.random() * W; y = Math.random() * H; }
+      var zd = Math.random();
       nodes.push({
         x: x, y: y, hx: x, hy: y, sxp: x, syp: y,
+        tx: x, ty: y, tr: 2, ta: 1,
         vx: (Math.random() - 0.5) * o.speed, vy: (Math.random() - 0.5) * o.speed,
         r: 1 + Math.random() * 2.1,
+        baseR: 1.1 + zd * 2.4,
+        z: zd,
+        reveal: 1, ping: 0,
+        offx: (Math.random() - 0.5) * 26, offy: (Math.random() - 0.5) * 26,
         c: o.palette[i % o.palette.length],
         tw: Math.random() * Math.PI * 2,
         deg: 1 + Math.floor(Math.random() * 5),
@@ -1414,10 +1443,43 @@ function makeNet(canvas, opts){
         av: (0.0015 + Math.random() * 0.003) * (Math.random() < 0.5 ? -1 : 1)
       });
     }
+    order = nodes.map(function(_, i){ return i; });
+    order.sort(function(a, b){ return nodes[a].z - nodes[b].z; });
     pathChain = null;
   }
   function step(){
     var i, n;
+    /* camera ease (parallax drift + zoom) */
+    if (o.camera){
+      var ct = performance.now() * 0.001;
+      var driftX = Math.sin(ct * 0.35) * 16 + Math.sin(ct * 0.13) * 10;
+      var driftY = Math.cos(ct * 0.29) * 12;
+      camX += ((camTX + driftX) - camX) * 0.05;
+      camY += ((camTY + driftY) - camY) * 0.05;
+    }
+    zoom += (zoomT - zoom) * 0.07;
+    /* radar-sweep boot: nodes discovered as the beam passes */
+    if (radarOn){
+      bootP = Math.min(1, (performance.now() - bootStart) / bootDur);
+      sweep = -Math.PI / 2 + bootP * Math.PI * 2 * 1.12;
+      var cx0 = W / 2, cy0 = H / 2;
+      for (i = 0; i < nodes.length; i++){
+        n = nodes[i]; n.tw += 0.02;
+        var na = Math.atan2(n.hy - cy0, n.hx - cx0);
+        if (na < -Math.PI / 2) na += Math.PI * 2;
+        if (n.reveal < 1 && sweep >= na){
+          if (n.reveal === 0) n.ping = performance.now();
+          n.reveal = Math.min(1, n.reveal + 0.055);
+        } else if (n.reveal > 0 && n.reveal < 1){
+          n.reveal = Math.min(1, n.reveal + 0.055);
+        }
+        var slide = 1 - n.reveal;
+        n.x = n.hx + n.offx * slide;
+        n.y = n.hy + n.offy * slide;
+      }
+      if (bootP >= 1){ radarOn = false; nodes.forEach(function(nn){ nn.reveal = 1; }); }
+      return;
+    }
     if (bootP < 1){
       bootP = Math.min(1, (performance.now() - bootStart) / bootDur);
       var be = 1 - Math.pow(1 - bootP, 3);
@@ -1440,7 +1502,7 @@ function makeNet(canvas, opts){
     if (o.you && youOn){
       for (i = 0; i < nodes.length; i++){
         n = nodes[i];
-        var rdx = n.x - youX, rdy = n.y - youY, rd2 = rdx*rdx + rdy*rdy;
+        var rdx = n.tx - youX, rdy = n.ty - youY, rd2 = rdx*rdx + rdy*rdy;
         if (rd2 < 4900 && rd2 > 1){
           var rd = Math.sqrt(rd2);
           n.vx += (rdx / rd) * 0.045; n.vy += (rdy / rd) * 0.045;
@@ -1493,21 +1555,51 @@ function makeNet(canvas, opts){
   function draw(){
     if (!W || !H) return;
     ctx.clearRect(0, 0, W, H);
-    var i, j, n, m;
+    var i, j, n, m, cx = W / 2, cy = H / 2;
+    /* transform every node through the camera (parallax by depth + zoom) */
+    for (i = 0; i < nodes.length; i++){
+      n = nodes[i];
+      var dz = o.depth ? (0.35 + n.z) : 1;
+      n.tx = cx + (n.x - cx) * zoom + camX * dz;
+      n.ty = cy + (n.y - cy) * zoom + camY * dz;
+      n.tr = (o.depth ? n.baseR * (0.5 + n.z * 0.9) : n.r) * (0.82 + 0.18 * zoom);
+      n.ta = o.depth ? (0.38 + n.z * 0.62) : 1;
+    }
+    /* radar sweep during boot */
+    if (radarOn){
+      var R = Math.sqrt(W * W + H * H) / 2 + 40;
+      ctx.save(); ctx.translate(cx, cy);
+      for (var kk = 30; kk >= 0; kk--){
+        var aa = sweep - kk * 0.045;
+        ctx.strokeStyle = 'rgba(255,90,77,' + (0.14 * (1 - kk / 30)).toFixed(3) + ')';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(aa) * R, Math.sin(aa) * R); ctx.stroke();
+      }
+      ctx.strokeStyle = 'rgba(255,90,77,0.85)'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(sweep) * R, Math.sin(sweep) * R); ctx.stroke();
+      /* instrument rings + crosshair */
+      ctx.strokeStyle = 'rgba(196,196,196,0.08)'; ctx.lineWidth = 1;
+      [0.22, 0.45, 0.7].forEach(function(rr){
+        ctx.beginPath(); ctx.arc(0, 0, R * rr, 0, Math.PI * 2); ctx.stroke();
+      });
+      ctx.beginPath(); ctx.moveTo(-R, 0); ctx.lineTo(R, 0); ctx.moveTo(0, -R); ctx.lineTo(0, R); ctx.stroke();
+      ctx.restore();
+    }
     /* links */
     ctx.lineWidth = 1;
     for (i = 0; i < nodes.length; i++){
       n = nodes[i];
-      if (n.life < 0.5) continue;
+      if (n.life < 0.5 || n.reveal < 0.4) continue;
       for (j = i + 1; j < nodes.length; j++){
         m = nodes[j];
-        if (m.life < 0.5) continue;
+        if (m.life < 0.5 || m.reveal < 0.4) continue;
         var dx = n.x - m.x, dy = n.y - m.y;
         var d2 = dx*dx + dy*dy, L = o.link;
         if (d2 < L * L){
-          var a = (1 - Math.sqrt(d2) / L) * o.linkAlpha * bootP;
+          var a = (1 - Math.sqrt(d2) / L) * o.linkAlpha * bootP
+                  * Math.min(n.reveal, m.reveal) * (0.55 + 0.45 * (n.ta + m.ta) / 2);
           ctx.strokeStyle = 'rgba(196,196,196,' + a.toFixed(3) + ')';
-          ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(n.tx, n.ty); ctx.lineTo(m.tx, m.ty); ctx.stroke();
         }
       }
     }
@@ -1521,10 +1613,10 @@ function makeNet(canvas, opts){
         m = nodes[j];
         var hdx = n.x - m.x, hdy = n.y - m.y;
         if (hdx*hdx + hdy*hdy < o.link * o.link * 1.4){
-          ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(n.tx, n.ty); ctx.lineTo(m.tx, m.ty); ctx.stroke();
         }
       }
-      ctx.beginPath(); ctx.arc(n.x, n.y, 11, 0, Math.PI * 2);
+      ctx.beginPath(); ctx.arc(n.tx, n.ty, 11, 0, Math.PI * 2);
       ctx.strokeStyle = 'rgba(255,90,77,0.9)'; ctx.stroke();
     }
     /* path trace (catalyst) */
@@ -1537,19 +1629,28 @@ function makeNet(canvas, opts){
         if (p <= 0) break;
         var A = nodes[pathChain[i]], B = nodes[pathChain[i + 1]];
         ctx.strokeStyle = 'rgba(255,184,77,0.85)';
-        ctx.beginPath(); ctx.moveTo(A.x, A.y);
-        ctx.lineTo(A.x + (B.x - A.x) * p, A.y + (B.y - A.y) * p); ctx.stroke();
-        ctx.beginPath(); ctx.arc(A.x, A.y, 3.4, 0, Math.PI * 2);
+        ctx.beginPath(); ctx.moveTo(A.tx, A.ty);
+        ctx.lineTo(A.tx + (B.tx - A.tx) * p, A.ty + (B.ty - A.ty) * p); ctx.stroke();
+        ctx.beginPath(); ctx.arc(A.tx, A.ty, 3.4, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(255,184,77,0.95)'; ctx.fill();
       }
     }
-    /* nodes */
-    for (i = 0; i < nodes.length; i++){
-      n = nodes[i];
+    /* nodes — drawn far-to-near for depth */
+    for (var oi = 0; oi < order.length; oi++){
+      n = nodes[order[oi]];
       var twk = 0.72 + Math.sin(n.tw) * 0.28;
-      ctx.globalAlpha = o.dotAlpha * twk * n.life * (0.25 + 0.75 * bootP);
+      ctx.globalAlpha = o.dotAlpha * twk * n.life * n.ta * n.reveal * (0.25 + 0.75 * bootP);
       ctx.fillStyle = n.c;
-      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(n.tx, n.ty, n.tr, 0, Math.PI * 2); ctx.fill();
+      /* radar discovery ping */
+      if (n.ping){
+        var pa2 = (performance.now() - n.ping) / 460;
+        if (pa2 < 1){
+          ctx.globalAlpha = (1 - pa2) * 0.9;
+          ctx.strokeStyle = '#FF5A4D'; ctx.lineWidth = 1.2;
+          ctx.beginPath(); ctx.arc(n.tx, n.ty, n.tr + 2 + pa2 * 15, 0, Math.PI * 2); ctx.stroke();
+        } else n.ping = 0;
+      }
     }
     ctx.globalAlpha = 1;
     /* travelling connection pulses */
@@ -1559,7 +1660,7 @@ function makeNet(canvas, opts){
       ctx.globalAlpha = (1 - PU.t) * 0.85;
       ctx.fillStyle = '#F4F2EE';
       ctx.beginPath();
-      ctx.arc(PA.x + (PB.x - PA.x) * PU.t, PA.y + (PB.y - PA.y) * PU.t, 1.8, 0, Math.PI * 2);
+      ctx.arc(PA.tx + (PB.tx - PA.tx) * PU.t, PA.ty + (PB.ty - PA.ty) * PU.t, 1.8, 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.globalAlpha = 1;
@@ -1568,20 +1669,20 @@ function makeNet(canvas, opts){
       youX += (pX - youX) * 0.14; youY += (pY - youY) * 0.14;
       var near = [];
       for (i = 0; i < nodes.length; i++){
-        var ydx = nodes[i].x - youX, ydy = nodes[i].y - youY, yd2 = ydx*ydx + ydy*ydy;
-        if (yd2 < 190 * 190) near.push([yd2, i]);
+        var ydx = nodes[i].tx - youX, ydy = nodes[i].ty - youY, yd2 = ydx*ydx + ydy*ydy;
+        if (yd2 < 200 * 200) near.push([yd2, i]);
       }
       near.sort(function(q, w){ return q[0] - w[0]; });
       ctx.lineWidth = 1;
       for (i = 0; i < Math.min(4, near.length); i++){
         var yn = nodes[near[i][1]];
-        var ya = (1 - Math.sqrt(near[i][0]) / 190) * 0.55 * bootP;
+        var ya = (1 - Math.sqrt(near[i][0]) / 200) * 0.55 * bootP;
         ctx.strokeStyle = 'rgba(255,90,77,' + ya.toFixed(3) + ')';
-        ctx.beginPath(); ctx.moveTo(youX, youY); ctx.lineTo(yn.x, yn.y); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(youX, youY); ctx.lineTo(yn.tx, yn.ty); ctx.stroke();
       }
-      ctx.beginPath(); ctx.arc(youX, youY, 3.2, 0, Math.PI * 2);
+      ctx.beginPath(); ctx.arc(youX, youY, 3.4, 0, Math.PI * 2);
       ctx.fillStyle = '#FF5A4D';
-      ctx.shadowColor = '#FF5A4D'; ctx.shadowBlur = 14;
+      ctx.shadowColor = '#FF5A4D'; ctx.shadowBlur = 15;
       ctx.fill(); ctx.shadowBlur = 0;
       ctx.font = '500 9px "JetBrains Mono", monospace';
       ctx.fillStyle = 'rgba(255,90,77,.9)';
@@ -1591,8 +1692,8 @@ function makeNet(canvas, opts){
     if (pulseT){
       var pt = (performance.now() - pulseT) / 1400;
       if (pt < 1){
-        var pcx = youOn ? youX : W / 2, pcy = youOn ? youY : H / 2;
-        ctx.beginPath(); ctx.arc(pcx, pcy, 8 + pt * 130, 0, Math.PI * 2);
+        var pcx = youOn ? youX : cx, pcy = youOn ? youY : cy;
+        ctx.beginPath(); ctx.arc(pcx, pcy, 8 + pt * 150, 0, Math.PI * 2);
         ctx.strokeStyle = 'rgba(255,90,77,' + (0.6 * (1 - pt)).toFixed(3) + ')';
         ctx.lineWidth = 1.5; ctx.stroke();
         if (pt < 0.35){
@@ -1605,19 +1706,18 @@ function makeNet(canvas, opts){
     /* ignition (join) */
     if (ignited){
       var t = (performance.now() - ignited) / 1500;
-      var cx = W/2, cy = H/2;
       var K = 7;
-      var near = nodes.slice().sort(function(a, b){
-        return ((a.x-cx)*(a.x-cx)+(a.y-cy)*(a.y-cy)) - ((b.x-cx)*(b.x-cx)+(b.y-cy)*(b.y-cy));
+      var nr = nodes.slice().sort(function(a, b){
+        return ((a.tx-cx)*(a.tx-cx)+(a.ty-cy)*(a.ty-cy)) - ((b.tx-cx)*(b.tx-cx)+(b.ty-cy)*(b.ty-cy));
       }).slice(0, K);
       ctx.lineWidth = 1.4;
       for (i = 0; i < K; i++){
         var pp = Math.max(0, Math.min(1, t * K * 0.9 - i * 0.55));
         if (pp <= 0) break;
-        var tn = near[i];
+        var tn = nr[i];
         ctx.strokeStyle = 'rgba(255,90,77,0.8)';
         ctx.beginPath(); ctx.moveTo(cx, cy);
-        ctx.lineTo(cx + (tn.x - cx) * pp, cy + (tn.y - cy) * pp); ctx.stroke();
+        ctx.lineTo(cx + (tn.tx - cx) * pp, cy + (tn.ty - cy) * pp); ctx.stroke();
       }
       var pulse = Math.min(1, t);
       ctx.beginPath(); ctx.arc(cx, cy, 6 + pulse * 3, 0, Math.PI * 2);
@@ -1652,13 +1752,22 @@ function makeNet(canvas, opts){
       });
     },
     ignitePulse: function(){ pulseT = performance.now(); if (REDUCED) draw(); },
+    bootRadar: function(durSec){
+      if (REDUCED){ bootP = 1; radarOn = false; nodes.forEach(function(n){ n.reveal = 1; }); draw(); return; }
+      bootDur = Math.max(50, durSec * 1000); bootStart = performance.now(); bootP = 0.0001;
+      radarOn = true;
+      nodes.forEach(function(n){ n.reveal = 0; n.ping = 0; n.x = n.hx + n.offx; n.y = n.hy + n.offy; });
+    },
+    bootProgress: function(){ return bootP; },
+    setCamera: function(nx, ny){ camTX = nx * 42; camTY = ny * 30; },
+    setZoom: function(z){ zoomT = z; },
     setPointer: function(x, y){ pX = x; pY = y; if (!youOn){ youOn = true; youX = x; youY = y; } },
     clearPointer: function(){ youOn = false; },
     resize: function(){ resize(); seed(); if (REDUCED) draw(); },
     hoverAt: function(x, y){
       var best = null, bd = 60 * 60;
       for (var i = 0; i < nodes.length; i++){
-        var dx = nodes[i].x - x, dy = nodes[i].y - y, d = dx*dx + dy*dy;
+        var dx = nodes[i].tx - x, dy = nodes[i].ty - y, d = dx*dx + dy*dy;
         if (d < bd) { bd = d; best = i; }
       }
       hover = best;
@@ -1678,11 +1787,12 @@ function makeNet(canvas, opts){
   return api;
 }
 
-/* ---------- hero constellation: you are a node ---------- */
+/* ---------- hero constellation: a depth-layered network you fly through ---------- */
 var heroCanvas = document.getElementById('hero-canvas');
 var heroNet = makeNet(heroCanvas, {
-  count: Math.min(150, Math.floor(innerWidth / 11)), link: 135, speed: 0.28,
-  linkAlpha: 0.15, hoverable: true, pulses: true, you: !TOUCH
+  count: Math.min(170, Math.floor(innerWidth / 10)), link: 132, speed: 0.24,
+  linkAlpha: 0.16, hoverable: true, pulses: true, you: !TOUCH,
+  depth: true, camera: !TOUCH
 });
 heroNet.play();
 if (!TOUCH){
@@ -1691,16 +1801,28 @@ if (!TOUCH){
     var r = heroCanvas.getBoundingClientRect();
     var cx = e.clientX - r.left, cy = e.clientY - r.top;
     heroNet.setPointer(cx, cy);
+    heroNet.setCamera((cx / r.width - 0.5) * 2, (cy / r.height - 0.5) * 2);
     var hit = heroNet.hoverAt(cx, cy);
     if (hit){
       heroTag.textContent = 'NODE ' + (4000 + hit.idx * 7) + ' · ' + hit.node.deg + ' DEGREES FROM YOU';
-      heroTag.style.left = (hit.node.x) + 'px';
-      heroTag.style.top = (hit.node.y) + 'px';
+      heroTag.style.left = (hit.node.tx) + 'px';
+      heroTag.style.top = (hit.node.ty) + 'px';
       heroTag.style.opacity = 1;
     } else { heroTag.style.opacity = 0; }
   });
   heroCanvas.addEventListener('mouseleave', function(){
-    heroNet.clearHover(); heroNet.clearPointer(); heroTag.style.opacity = 0;
+    heroNet.clearHover(); heroNet.clearPointer(); heroNet.setCamera(0, 0); heroTag.style.opacity = 0;
+  });
+}
+/* scroll pulls the camera back out of the network */
+if (!REDUCED){
+  ScrollTrigger.create({
+    trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true,
+    onUpdate: function(self){ heroNet.setZoom(1 - self.progress * 0.5); }
+  });
+  gsap.to('.hero-content', {
+    opacity: 0, y: -50, ease: 'none',
+    scrollTrigger: { trigger: '#hero', start: 'top top', end: '68% top', scrub: true }
   });
 }
 
@@ -1723,6 +1845,18 @@ function finishEntry(){
   gsap.to(heroLines, { yPercent: 0, duration: 0.95, ease: 'power3.out', stagger: 0.1, delay: 0.1, overwrite: true });
   heroLines.forEach(function(l, i){ setTimeout(function(){ l.classList.add('lit'); }, i * 100 + 260); });
 }
+/* live SYNC % + progress bar, driven by the net's boot progress */
+function driveSync(){
+  var sv = document.getElementById('entry-sync'), sb = document.getElementById('entry-bar');
+  if (!sv) return;
+  var iv = setInterval(function(){
+    var p = heroNet.bootProgress();
+    var pct = Math.min(100, Math.round(p * 100));
+    sv.textContent = ('00' + pct).slice(-3);
+    sb.style.width = pct + '%';
+    if (p >= 1){ clearInterval(iv); }
+  }, 40);
+}
 if (REDUCED){
   if (entry && entry.parentNode) entry.parentNode.removeChild(entry);
 } else {
@@ -1733,15 +1867,16 @@ if (REDUCED){
   gsap.set(heroLines, { yPercent: 110 });
   if (SEEN){
     if (entry && entry.parentNode) entry.parentNode.removeChild(entry);
-    heroNet.boot(1.1);
-    setTimeout(finishEntry, 620);
+    heroNet.bootRadar(1.3);
+    setTimeout(finishEntry, 760);
   } else {
-    heroNet.boot(2.7);
+    heroNet.bootRadar(2.9);
+    driveSync();
     var elog = document.getElementById('entry-log');
     var TLINES = [
       [['ESTABLISHING NETWORK…', false]],
       [['SCANNING ', false], [fmt(conn) + ' CONNECTIONS', false]],
-      [['RESOLVING CONSTELLATION', false]],
+      [['TRIANGULATING NODES', false]],
       [['NODE ASSIGNED: ', false], ['YOU', true]]
     ];
     var caret = document.createElement('span'); caret.className = 'entry-caret';
@@ -1781,10 +1916,16 @@ if (REDUCED){
     gsap.to(entry, { backgroundColor: 'rgba(10,10,15,0)', duration: 0.7, delay: 0.25 });
     entry.addEventListener('click', function(){
       skipped = true;
-      heroNet.boot(0.05);
+      heroNet.bootRadar(0.05);
       finishEntry();
     });
   }
+  /* failsafe: never let the entry stick (e.g. tab hidden at load throttles the
+     typed sequence and rAF) — hard wall-clock backstop + resume on visibility */
+  setTimeout(finishEntry, 6000);
+  document.addEventListener('visibilitychange', function(){
+    if (!document.hidden && heroNet.bootProgress() >= 1) finishEntry();
+  });
 }
 
 /* ---------- blue flood wipes ---------- */
@@ -1932,7 +2073,7 @@ wlForm.addEventListener('submit', function(e){
   wlForm.querySelector('input').disabled = true;
   wlForm.querySelector('button').style.opacity = 0.35;
   wlForm.querySelector('button').style.pointerEvents = 'none';
-  wlNote.innerHTML = 'YOU\'RE ON THE LIST — TEST BUILD, NOTHING WAS SENT. THE REAL WAITLIST IS LIVE AT <a href="https://www.studioex.co" target="_blank" rel="noopener">STUDIOEX.CO</a>';
+  wlNote.innerHTML = 'YOU\'RE ON THE LIST — TEST BUILD, NOTHING WAS SENT. TO JOIN FOR REAL, EMAIL <a href="mailto:info@in-orbit.co">INFO@IN-ORBIT.CO</a>';
   conn += 1; renderConn();
 });
 
